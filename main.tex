@@ -81,14 +81,12 @@
 
 \abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
-During the last years, Visible Light Communication (VLC), a novel technology that
-enables standard Light-Emitting-Diodes (LEDs) to transmit data, is gaining signi-
-ficant attention. In the near future, this technology could enable devices containing
-LEDs –such as car lights, city lights, screens and home appliances– to carry information or data to the end-users, using their smartphone. However, VLC is currently limited by the end-point receiver, such as a the mobile camera, or a peripheral connected throught the jack input and to unleash the full potential of VLC, more advanced receiver are required.
+During the last years, Visible Light Communication (VLC), a novel technology that enables standard Light-Emitting-Diodes (LEDs) to transmit data, is gaining significant attention. In the near future, this technology could enable devices containing
+LEDs – such as car lights, city lights, screens and home appliances – to carry information or data to the end-users, using their smartphone. However, VLC is currently limited by the end-point receiver, such as a the mobile camera, or a peripheral connected through the jack input and to unleash the full potential of VLC, more advanced receiver are required.
 
-On other, few year ago, Google ATAP - the Google inovation departement - announced the ARA initiative. This consist on a modular phone where parts of the phone, like cameras, sensors or networks can be changed. So when a new feature appears or requiered by the user it is not needed to change the mobile phone, just to buy the modules with the functionality.
+On other, few year ago, Google ATAP - the Google innovation department - announced the ARA initiative. This consist on a modular phone where parts of the phone, like cameras, sensors or networks can be changed. So when a new feature appears or required by the user it is not needed to change the mobile phone, just to buy the modules with the functionality.
 
-This Master Thesis presents the design and development of a simple module that will support communication by light (VLC) using the Ara Module Developer Kit provided by Google. It consists on building a frontend circuit, connecting a photodiode that receives the level of light and use it as data carrier, in order to receive and display data inside a custom Android applciation on the Ara smartphone.
+This Master Thesis presents the design and development of a simple module that will support communication by light (VLC) using the Ara Module Developer Kit provided by Google. It consists on building a front-end circuit, connecting a photodiode that receives the level of light and use it as data carrier, in order to receive and display data inside a custom Android application on the Ara smartphone.
 
 We evaluate the communication properties of our receiver module (link quality, bit error rate), and achieved a 1.0 kilobits per second data-rate using visible light at 2.5 meters distance. We hope that our work will lower the entry barrier for future Ara module development and will demonstrate visible light possibility to be used as communication channel between objects or building to the end-user \ldots
 }
@@ -138,21 +136,16 @@ To my supervisor, Josep Paradells which trust me and give me the opportunity to 
 \lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
 \listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
 {
-\textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere \\
-%\textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
+\textbf{VLC} & \textbf{V}isible \textbf{L}ight \textbf{C}ommuncaition \\
+\textbf{LED} & \textbf{L}ight \textbf{E}mitting \textbf{D}iode \\
+\textbf{Op-Amp} & \textbf{O}perational \textbf{A}mplifier \\
+\textbf{OS} & \textbf{O}perating \textbf{S}ystem \\
+\textbf{UART} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere \\
+\textbf{I\textsuperscript{2}C} & \textbf{I}ist \textbf{2}bbreviations \textbf{C}ere \\
+\textbf{MDK} & \textbf{M}odule \textbf{D}evelopement \textbf{K}it \\
+\textbf{MCU} & \textbf{M}icro \textbf{C}ontroller \textbf{U}nit \\
+\textbf{BPS} & \textbf{B}it \textbf{P}er \textbf{S}econd \\
 }
-
-%----------------------------------------------------------------------------------------
-%	DEDICATION
-%----------------------------------------------------------------------------------------
-
-\setstretch{1.3} % Return the line spacing back to 1.3
-
-\pagestyle{empty} % Page style needs to be empty for this page
-
-\dedicatory{For/Dedicated to/To my\ldots} % Dedication text
-
-\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
@@ -166,7 +159,7 @@ To my supervisor, Josep Paradells which trust me and give me the opportunity to 
 % Uncomment the lines as you write the chapters
 
 \input{Chapters/Introduction}
-\input{Chapters/Context} 
+\input{Chapters/Technical} 
 \input{Chapters/SoA}
 \input{Chapters/Proposal} 
 \input{Chapters/ProjectD} 
