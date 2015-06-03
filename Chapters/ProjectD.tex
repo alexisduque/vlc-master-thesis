@@ -46,7 +46,7 @@
 
 \section{Receiver CAN and Buffer}
 
-\subsection{Digitalisation}
+\subsection{Digitalization}
 \subsection{Decoding}
 \subsection{Buffering}
 \subsection{Input/output}
@@ -57,5 +57,36 @@
 
 \section{Ara Android App}
 
+In this part, we describe the Android application that we have developed, to support our VLC receiver module.
+
+\subsection{Application structure and operations}
+Our application as been developed used Google Android API 18, to be compliant with the operating system version which has been installed on the AP Board.
+
+The application package has been called respecting Java name convention : edu.upc.entel.wng.vlcAraModule and content 3 classes :
+
+\begin{itemize}
+\item VLCAraActivity : initialize the application and user interface. It surcharges the Activity class , as requested by the Android API.
+\item Sensor : define and perform operations to communicate with our module such as I2C bus initialization, data polling as well as handling and message with the User Interface (UI).
+\item VlcLogger : this class realize logging operation saving received data on the board internal storage or an external SD Card.
+\end{itemize}
+
+Application workflow is quiet simple :
+\begin{enumerate}
+\item Initialize and start the application main Activity.
+\item Setup the I2C Bus.
+\item Initialize the logger and create a log file.
+\item Start the \textbf{Sensor} thread : poll I2C bus at defined intervall 
+\item Handle Sensor Thread message and user interaction
+\end{enumerate}
+
+\subsection{User Interface}
+
+The application user interface as few components as defined in the XML activity layout definition file :
+\begin{itemize}
+\item EditText : used to display received bits.
+\item 
+\end{itemize}
+
+\subsection{I2C JNI interface}
 \subsection{Results}
 \subsection{Interpretation}

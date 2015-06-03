@@ -19,15 +19,21 @@ Visible Light Communication technology.
 \subsection{Visible Light Communication System Considered}
 
 An indoor visible light communication system using white LEDs under consideration is
-shown in Fig. 3.1 and 3.2 [1]. All the lights in the room are replaced by LEDs. The LEDs
+shown in \ref{vlc-model}. All the lights in the room are replaced by LEDs. The LEDs
 are not only used for illuminating the room but also for an optical wireless
 communication system. On-off Keying Return-to-Zero (OOK-RZ) coding is used for
 modulating white LEDs. Optical lighting and optical transmission of the white LEDs
 have been tested to evaluate the requirements of using VLC for indoor applications. The
 effects of the delay problems faced in the high data rate transmission have been studied
-and presented [1].
+and presented in .
 
-Fig 3.1: VLC model room [1]. Fig 3.2: Distribution of LEDs inside model room [1].
+\begin{figure}[htbp]
+  \centering
+    \scalebox{0.6}{\includegraphics[width=\textwidth]{Pictures/vlc-model-room.png}}
+    \rule{35em}{0.5pt}
+  \caption[VLC Model Room]{VLC Model Room}
+  \label{fig:vlc-model}
+\end{figure}
 
 \subsection{Visible Light Road-to-vehicle Communication Using High-Speed Camera}
 
@@ -35,28 +41,25 @@ LEDs are already being used in traffic lights, and they can be used as the commu
 medium. Road-to vehicle communication using the LEDs in the traffic signal lights was
 proposed.
 
-Figure 3.3: Road-to-vehicle visible light communication [17].
+\begin{figure}[htbp]
+  \centering
+    \scalebox{0.6}{\includegraphics[width=\textwidth]{Pictures/vlc-road.png}}
+    \rule{35em}{0.5pt}
+  \caption[Road-to-vehicle visible light communication]{Road-to-vehicle visible light communication}
+  \label{fig:vlc-road}
+\end{figure}
 
-The above Fig. 3.3 shows the basic usage of LED as a transmitter and CAMERA as a
+The above \ref{vlc-road} shows the basic usage of LED as a transmitter and CAMERA as a
 receiver. In this model, they mounted a camera before the front end of the car. The
 camera is used as the information receiver from traffic signal lights. The advantage of
 using the camera is that multiple data can be transmitted by the LEDs and received by
-High-speed cameras [17]. 
+High-speed cameras. 
 
 
 \subsection{Integrated System of White LED Visible-Light Communication and Power-Line Communication}
 
 In [2], optical communication using the existing power-line in a household is proposed as
-shown in \ref{fig:vlc-model}
-
-\begin{figure}[htbp]
-  \centering
-    \scalebox{0.6}{\includegraphics[width=\textwidth]{Pictures/vlc-model-room.png}}
-    \rule{35em}{0.5pt}
-  \caption[VLC System model]{VLC System model}
-  \label{fig:vlc-model}
-\end{figure}
-
+shown in \ref{fig:vlc-powerline}
 The power-line is used for communication between white LEDs and other fixed
 networks. The already installed power-lines and outlets behave as data networks and
 ports.
@@ -75,7 +78,7 @@ by BPF through the power-line, and biased before sending to the LED lights. The
 electrical signal is then converted into an optical signal by LEDs and sends it to the
 photodiode, where it converts the captured optical signal to an electrical signal. The
 signal is demodulated according to the received level of light and then is passed to the
-mobile terminal [2].
+mobile terminal.
 
 \subsection{Visible Light Communication for Advanced Driver Assistant Systems}
 
@@ -94,61 +97,26 @@ both LEDs and photodiodes. Intensity modulation was implemented to reach the mos
 viable modulation. Various important design parameters were optimized by using
 intensive investigation based on gain variation over 100m of transmission range [4]. 
 
-
-\subsection{Dual-Use Visible Light Approach to Integrated}
-
-Communication and Localization of Underwater Robots with
-Application to NonDestructive Nuclear Reactor Inspection
-A VLC system for wireless underwater communication was proposed in [23] for robotic
-inspection of nuclear power plants; there the reactor exists in an underground
-environment as shown in Fig. 3.7. A solution for maintaining the consistent line of sight
-to maintain a communication link was discussed in detail in [23].
-
-Figure 3.7: Architecture of the dual-use optical communication system [23].
-
-An optical wireless link has been established between the Remotely Operated Vehicles
-(ROV) and gateway station using LEDs and Photodiodes on both sides as depicted in Fig
-3.7. Underwater ROV was used to communicate with the gateway station over water to
-transmit control signals. Both the gateway station and ROV are capable of directing a
-light beam in the three-dimensional space [23]. 
-
-
 \subsection{Study of Visible Light Communication System Using RGB LED Lights}
 
-Figure 3.8: Outline of the system [24].
+Disney research group in Zurih {\citep{disney}} demonstrates a half-duplex VLC LED-to-LED communication with various applications with new generation toys.
+First example is a short-range directional communication with
+a number of toys, where front and backlights are used to exchange
+messages when pointed towards each other. On other application is a LED light bulb in a desk lamp receiving
+messages from a mobile device and broadcasts it back to the desk
+with higher light intensity and larger coverage. The static lamp acts
+as a repeater so that more devices can receive the original messages
+and the resulting network connectivity increases.
 
-A prototype was designed to demonstrate wireless VLC using RGB LEDs and sensors
-[24]. As shown in Fig. 3.8, on the left are the RGB LEDs used as signal transmitters. The
-right side is the RGB sensor, which is used as a receiver. The RGB LEDs enable parallel
-signal communication, and a PSoC microcontroller is used to control them, thus
-significantly reducing the need for extra circuits. Pulse Width Modulation was used to
-switch RGB LEDs at high speeds. The characteristics of both the variation in color and
-change in intensity of each RGB LED and RGB sensor were analyzed to realize multiplevalue
-signals communication by using RGB color [24]. 
+\subsection{Visible Light Communication using smartphone camera and rolling shutter effect}
 
-\subsection{Visible Light Communication Link for Audio and Video Transmission}
+Cameras embedded in smartphones can be used as VLC receivers. As a result, common lights and smartphone cameras has the potential to enable a great number
+of applications with low cost. In \citep{rolling}, a prototype VLC
+system that utilizes undersampled frequency shift ON-OFF keying (UFSOOK) modulation is proposed. The system utilizes rolling shutter cameras as the receiver and takes advantages of its characteristics to improve the receiving performance. An LED is used as the transmitter.
+Information is transmitted in the continuous state (ON-OFF) changes of LEDs which are invisible to human eyes. 
+The performance evaluation results demonstrate that the communication prototype is robust and can resist common optical interferences and noises within the image.
 
-Figure 3.9: Block diagram of transmitter module [27].
-Figure 3.10: Block diagram of receiver module [27].
-A VLC system to transmit high quality video and audio signal was proposed and
-demonstrated by using illumination LEDs in [27]. The analog video signal was
-modulated by using an ultra high speed comparator in the transmitter. The analog signal
-was converted from analog to digital. Both the video and analog signals were transmitted
-using the illumination LEDs in the transmitter. The photodiode at the receiver senses the
-optical signals from the LEDs and is converted into electrical signals. The electrical
-signal is then amplified to recover the digital signal and converted back to an analog
-signal to video/ audio out [27]. 
-
-\subsection{Ultra Thin Secondary Lens for Visible Light Communication Based on a White LED}
-Figure 3.11: VLC system using WLED for personnel mobile telecommunication device
-[42].
-A new design was proposed in [42] for an ultra-thin secondary lens by using white
-Surface Mount Device (SMD) LEDs for VLC. The GaN-based blue LEDs are used as
-SMD LEDs and were mounted directly on the surface of the mobile device. The SMD
-LEDs are used for optical transmission between mobile devices. The precise modeling of
-the GaN chip was analyzed and verified. The modeling data were compared with
-measured data to verify the proposed model. 
-
+\subsection{Visible Light Communication using smartphone ambient light sensor}
 
 %----------------------------------------------------------------------------------------
 %	SMARTPHONE SOLUTIONS
