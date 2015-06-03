@@ -6,14 +6,37 @@
 
 \lhead{Chapter 4. \emph{Proposal}} % This is for the header on each page - perhaps a shortened title
 
+In this chapter, we would introduce our proposal and contribution to current VLC researches. 
+
 %----------------------------------------------------------------------------------------
 %	HARDWARE
 %----------------------------------------------------------------------------------------
 
-\section{Hardware}
+\section{System Description}
+
+
+Considering previous results and solutions, we propose an innovative solution, taking advantage of the Ara modular smartphone,
+to design a well suited front-end receiver for visible light communication.
+
+As the Ara platform let use choose our own hardware and receiver, we would avoid problems and sampling limitations related to camera, or ambient light sensor.
+On other hand, the modular platform, through its Unipro Bus, give us the possibility to connect our module directly on the  main application processor board.
+In this way, we don't need to use a smartphone peripheral, such as USB, or Bluetooth controller, that would add a huge overhead in the transmission and processing.
+
+The system, that we develop as part of this project consist in a commercial LED emitter, driven by a STM32L0 micro-controller unit, in order to transmit the OOK modulated signal. Before that, we propose to encode data using 4B6B or Manchester, in order to perform different experimentation and compare the result.
+
+Considering the receiver module, our light sensor consist in a fotodiode followed by several electronic circuit : current to tension converter, low-pass filter and positive gain amplifier.
+
+The analog to digital conversion has been realized at 1,1 MSPS by the micro-controller unit. To fit the platform requirement and optimize the throughput, it performs several operations such as thresholding, decoding and buffering.
+
+The transmission between the MCU and the Ara Development Kit is done in polling mode exploiting the I2C bus present on both side of the system. 
+
+Finally, we develop a basic Android application for the platform, that implement I2C bus initialization, data polling, and logging for later computation and analysis.
+
 
 %----------------------------------------------------------------------------------------
-%	SOFTWARE
+%	HARDWARE
 %----------------------------------------------------------------------------------------
 
-\section{Hardware}
+\section{VLC Contribution}
+
+

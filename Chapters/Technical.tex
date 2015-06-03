@@ -4,30 +4,23 @@
 
 \lhead{Chapter 2. \emph{Technical background}}
 
-%----------------------------------------------------------------------------------------
-
-\section{Motivations}
-
-
-%----------------------------------------------------------------------------------------
-
 \section{VLC Technology}
 VLC as we know it today would not be possible without LEDs. Before we introduce
-our implementation of networked VLC, we provide background information
+our proposal, we provide background information
 about LEDs as wireless transmitter, then we describe the many ways in which
-light intensity can be modulated and received, and the SoA on networked VLC.
+light intensity can be modulated and received, and the lice coding scheme used
+in indoor VLC.
 
-\subsection{Using LEDs as wireless transmitters}
+\section{VLC Technology}
 
 Modulation of light has been used for centuries. In 1792 the French inventor
 Claude Chappe invented the optical telegraph, a system of towers with signaling
-devices, which allowed Napoleon to pass messages throughout his empire. This
-idea was reused on ships in the form of a heliograph that used mirrors for telegraphy
-and used on-off-keying to modulate letters and numbers in light. Although
+devices, which allowed Napoleon to pass messages throughout his empire. Although
 simple and practical, these systems are the ancestors of VLC. For some decades
 after these events, light communication in the form of morse was used, but further
 development of light communication stood still because with incandescent lamps
 the data rates pale in comparison to what could be achieved with radio.
+
 It is only until recently that we have a pervasive infrastructure that can modulate
 light to achieve data rates that are meaningful for today’s communication needs.
 Due to recent advancements in LED technology we can transform light bulbs into
@@ -40,7 +33,8 @@ century incandescent lamps have been the primary source of light, but incandesce
 light cannot comply with high speed modulation because of the mechanism
 it uses to generate light. Incandescence is the effect of emitting thermal radiation
 from matter as a result of its temperature. In incandescent light bulbs a wire is
-heated by running a current through it, and the resistance of this wire forms kinetic energy which is released in the form of light. This means that intensity control
+heated by running a current through it, and the resistance of this wire forms kinetic 
+energy which is released in the form of light. This means that intensity control
 of incandescent lamps takes place through two steps, resulting in indirect control
 of the signal. This would not be a problem if the thermal inertia would not make
 the system too slow for high speed modulation, but it does.
@@ -50,24 +44,22 @@ high speed modulation. LEDs consist of a semiconductor material that contains
 excited electrons. A fundamental property of electrons is that when they are
 forced into a lower energy state they release their energy in the form of the emission
 of photons. This effect is called electroluminescense and gives direct control
-over light intensity through the control of voltage and current. A simple circuitry
+over light intensity through the control of voltage and current. A simple circuit
 with transistors can deliver the necessary control of current, and this makes the
 changes in light intensity fast enough to transfer information at a high data rate.
+
 An alternative to LEDs is laser. Lasers can also be controlled at high speed, and
 have the additional capability of strengthening the electroluminescense effect by
-amplifying and focusing the generated light [7]. This makes laser a good candidate
+amplifying and focusing the generated light. This makes laser a good candidate
 for long range communication, but for short distances its transmission angle is too
 narrow (and hence it can be easily obstructed) without using lenses. Another
 important disadvantage of laser is that poses health hazards to human beings.
 
-\subsection{Transmitting and Receiving data with Visible Light
-Communication}
+\subsection{Modulation and transmitter}
 
 The light emitted by LEDs can be modulated in different forms, and there are also
 several types of receivers that can be used to decode the modulated light. Next,
 we describe all these options.
-
-\subsubsection{Transmitters}
 
 As mentioned before, the ability of LEDs to modulate light at high speeds make
 them the obvious choice for VLC transmitters in terms of speed and light intensity,
@@ -92,8 +84,7 @@ pulses, we get frequency modulation.
 
 So, frequency modulation in VLC is actually frequency modulation through amplitude
 modulation. This is the main difference between radio and light modulation.
-In this thesis, when we refer to frequency modulation, we mean frequency modulation
-through amplitude modulation. The reader must be aware of this fact.
+
 There are many different modulation schemes in use for VLC, and we will now
 discuss the most commonly used.
 
@@ -103,8 +94,9 @@ discuss the most commonly used.
 turn a carrier signal on and off. OOK has a low processing burden but is
 proven to be very sensitive to noise. Enhanced schemes like On-Off-Keying
 Non-Return-to-Zero have shown data rates of 1.5 Gigabits per seconds,
-using a Integrated Circuit with LEDs bonded into the chip [27].
-ii Pulse Time Modulation (PTM) is a technique in which data is modulated
+using a Integrated Circuit with LEDs bonded into the chip \citep{ook-450}.
+
+\item Pulse Time Modulation (PTM) is a technique in which data is modulated
 in the ratio between the on and off time of the carrier signal. Pulse Position
 Modulation (PPM) and Pulse Width Modulation (PWM) fall into this
 category. The advantage of PTM is that it does not require digital-to-analog
@@ -114,29 +106,26 @@ hand, PTM requires accurate timing for both the receiver and transmitter
 because the ratio between on and off periods needs to be well synchronized.
 Another advantage of PTM is that it provides flickering and dimming
 support without additional techniques, which is good for use in illumination
-devices, but speeds are lower than with other modulation systems [13].
-iii Pulse Amplitude Modulation (PAM) uses brightness levels to realize multilevel
+devices, but speeds are lower than with other modulation systems \citep{ppm}.
+
+
+\item  Pulse Amplitude Modulation (PAM) uses brightness levels to realize multilevel
 signals to encode symbols. This modulation is sensitive to external
 light sources as they influence the intensity, and has relative low speeds
 compared to other techniques. Dimming control can easily be implemented
-in PAM by changing the probability of the constellation points [19].
+in PAM by changing the probability of the constellation points \citep{diming}
 iv Frequency Shift Keying (FSK) looks a lot like On-Off-Keying, but instead of
 switching a carrier on and off, the system switches between two frequencies.
 This switch in frequency can be in terms of color i.e. a one is red and
-a zero is blue, or in pulse frequency [3][12]. The color technique uses a red
-and a blue colored LED, and toggles between them to signal symbols. Both
-techniques have the advantage of filtering noise by implementing band pass
-filters. With the pulse frequency variant this can be done using a signal processing
-algorithm, and with the color variant it can be done by placing color
-filters over the photodiodes.
+a zero is blue, or in pulse frequency.
 
 \item Phase Shift Keying (PSK) encodes symbols by changing the phase of the
 light intensity that has been shaped into a sinusoidal form. Many variants
 of PSK exist, depending on the number of constellation points used (Binary
 PSK uses 2 points, 0\degree  and 180\degree , Quadrature PSK uses 4 points). PSK
-can be used as base modulation [10], but can also be used in combination
+can be used as base modulation, but can also be used in combination
 with other techniques like OFDM to improve certain weaknesses like intersymbol
-interference [2].
+interference \citep{ofdm-plc}.
 
 \item Orthogonal Frequency Division Multiplexing (OFDM) is a technique that
 uses a large number of modulated carriers with sufficient frequency spacing
@@ -144,35 +133,28 @@ so that they are orthogonal. Again, this frequency is modulated through intensit
 The strongest advantage of OFDM is that it provides resistance to
 multipath effects, which result in long distances and high speed data transfers.
 Data rates beyond 3 Gigabit per seconds have been reported at short
-distances $\approx$ 10cm) [1][4]. Unfortunately such high speeds demand require
+distances $\approx$ 10cm) \citep{modulationStandard}. Unfortunately such high speeds demand require
 high-speed processing units.
 
 \item  Quadrature Amplitude Modulation (QAM) is a modulation scheme that conveys
 bit streams by changing the amplitudes of two or more independent
-carrier signals, which results in a spectral efficient scheme [9]. A form of
+carrier signals, which results in a spectral efficient scheme. A form of
 QAM is the Carrier-less Amplitude and Phase (CAP) modulation, a promising
 high speed VLC modulation scheme capable of transmitting at 3.22
 gigabits per second using an RGB-type led. QAM and CAP can both
-be combined with OFDM to improve its performance even further [22].
+be combined with OFDM to improve its performance even further \citep{ofdm-cap}.
 
 To select a good modulation scheme, people have designed models that can
 be used to compare different schemes by simulating environmental conditions.
 The Matlab-based platform of De Lausnay et al. evaluates different modulation
-techniques and can also help to select the right modulation type [6]. To asses
-the performance of a modulation type, models have been developed to describe
-the signal properties of VLC in a free medium like air, for example the model by
-Komine and Nakagawa [11] which describes multipath effects. The influence of
-ambient light sources on light communication is modelled in the system of Virma
-et al. [18]. These models show that On-Off-Keying, although it is the most simple
-modulation type, has good performace for VLC.
+techniques and can also help to select the right modulation type \citep{matlab}.
 
 Based on the information above, we decided to use On-Off-Keying modulation
-for our platform because of the good average performance. The use of this techNique keeps component count low so that multiple transmitters and receivers fit
-on the board.
+for our platform because of the good average performance. The use of this technique keeps component count low so that multiple transmitters and receivers fit on the board.
 
 \end{enumerate}
 
-\subsubsection{Receivers}
+\subsection{Receivers}
 
 While on the transmitter side the most widely used element is the LED, on the
 receiver side we have several options: cameras, photodiodes and phototransistors,
@@ -187,15 +169,15 @@ characteristics.
 \item Cameras can detect light, its intensity and its color, using an array of semiconductor
 junctions or capacitors. As the miniaturization of cameras continues
 they can be found in embedded systems like mobile phones, allowing
-them to receive vlc signals without additional hardware [12]. Cameras have
+them to receive vlc signals without additional hardware \cite{camera}. Cameras have
 the advantage of focusing on the transmission source by looking at specific
 pixels, so it becomes possible to select a specific VLC source or to ignore
 a noise source. As a receiver for VLC, cameras have the disadvantage
 of requiring more processing to retrieve the signal from the image sensor.
 Secondly, a bigger disadvantage is the frame rate which is limited by the
 camera’s (electronic or mechanic) shutter speed, which limits the signal
-sample rate and thus the data transfer rate [8][14]. There are high speed
-cameras which offer a solution to this problem [24], but currently they are
+sample rate and thus the data transfer rate. There are high speed
+cameras which offer a solution to this problem, but currently they are
 too big and power hungry to use in embedded devices.
 
 \item Photodiodes and phototransistors work based on the same principle but
@@ -213,30 +195,21 @@ and sampling to be able to receive a clear electronic signal. Advances in
 technology are capable of integrating these into a single chip which can
 alleviate this disadvantage.
 
-This effect led to the proof of Albert Einstein that light under some conditions can be observed discrete and quantized: the photon.
-
-\item LEDs can be used as light sensors. An attentive reader may have noticed that photodiodes and LEDs exploit an oppose effect: while in photodiodes photons that strike the material generate a flow of electrons, in LEDs a flow of electrons release photons (light). This reversed and complementary effect
-can be used to make an LED both a receiver and a transmitter of VLC.
-
-The opposite is not true: a photodiode cannot be used as light source, as
-their type of material prevent the release of light. The circuit around the LED contains a driver for the transmitter part and an amplifier with analog-to-digital converter for the receiver, and using a switching component the LED can operate in one of the two modes [16].
-This dual operation reduces the area needed for a transmitter and receiver
-module, but requires a more complicated circuitry. Another disadvantage is
-that LEDs are not as light sensitive as photodiodes. Additionally the use of
-a combined ’antenna’ hinders full-duplex communication because receiving
-and transmitting at the same time is not possible. However, when an
-application only needs half-duplex communication LEDs are a very elegant
-solution.
+\item LEDs can be used as light sensors. An attentive reader may have noticed that photodiodes and LEDs exploit an oppose effect: while in photodiodes photons that strike the material generate a flow of electrons, in LEDs a flow of electrons release photons (light). This reversed and complementary effect can be used to make an LED both a receiver and a transmitter of VLC \citep{led2led}.
 
 Considering the various options for receivers, we opted for photodiodes because
 they have the higher potential to achieve high data rates, are more sensitive
-than other sensors, and can provide full duplex communication.
+than other sensors.
 
 \end{enumerate}
 
-\subsection{Visible light channel}
-\subsection{Modulation}
-\subsection{Medium Access Control layer}
+\subsection{Line coding}
+
+\subsubsection{Manchester}
+
+\subsubsection{4B6B}
+
+
 
 \section{Ara Plateform}
 \subsection{Introduction to the Ara project}
