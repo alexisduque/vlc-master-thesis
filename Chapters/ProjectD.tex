@@ -10,11 +10,21 @@
 %	Ara platform discovery
 %----------------------------------------------------------------------------------------
 
-\section{Ara platform discovery}
+\section{Ara platform study}
 
-\subsection{Tests possibilities}
+In this section, we will describe different studies and preliminary experimentation we've done before designing  the module.
 
-\subsection{Issues and weakness}
+In fact, because of the lake of literature or past experience with the Ara platform, we first need to study the Ara Module Development Kit send by Google ATAP. We focus on understanding the role of each board, and there I/O - regarding protocols and speed. Then we determine the reliable rate on witch the operating system can execute a single task - such as I/O operation. Finally we perform some benchmark and CPU load test. 
+
+\subsection{MDK and boards study}
+
+
+
+\subsection{Android for ARA reliable I/O operation rate}
+
+\subsection{Ara benchmark}
+
+\subsection{Conclusion}
 
 
 %----------------------------------------------------------------------------------------
@@ -75,18 +85,32 @@ Application workflow is quiet simple :
 \item Initialize and start the application main Activity.
 \item Setup the I2C Bus.
 \item Initialize the logger and create a log file.
-\item Start the \textbf{Sensor} thread : poll I2C bus at defined intervall 
-\item Handle Sensor Thread message and user interaction
+\item Start the \textbf{Sensor} thread that poll I2C bus at defined interval and send the result to the android activity. 
+\item Handle Sensor thread messaging and user interaction.
 \end{enumerate}
 
 \subsection{User Interface}
 
-The application user interface as few components as defined in the XML activity layout definition file :
+The application user interface as few components as defined in the XML activity layout description file :
 \begin{itemize}
-\item EditText : used to display received bits.
-\item 
+\item EditText field: used to display received bits.
+\item "Clear" and "Save" Button :
 \end{itemize}
 
+Each component are placed in a horizontal layout container.
+
 \subsection{I2C JNI interface}
+
+As the Android Java API for the Ara Module Development Kit is the same as the standard API, we need to implement additional components in order to access the low level hardware such as the GPIO or the I2C bus.
+The Ara MDK is provided with an operating system level driver, developed in C, that can be used to configure, read and write date, in a simple way.
+However, this C interface, can't be directly used through the Java API. In order to give the possibility to perform I2C operations in our Android application, we develop a JNI interface that would wrap the C driver into a Java package.
+So we define 2 Java classes : 
+\begin{itemize}
+\item I2CManager : it configures the i2c bus, by using UNIX I2C kernel driver and execute I2CTransaction.
+\item I2CTransaction : it represents read or write operation on the bus.
+\end{itemize}
+
+Class methods are detailed in the Anexxe.
+
 \subsection{Results}
 \subsection{Interpretation}

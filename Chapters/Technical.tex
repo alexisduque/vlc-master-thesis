@@ -215,4 +215,30 @@ than other sensors.
 
 \section{Ara Plateform}
 \subsection{Introduction to the Ara project}
+
+Project Ara is the codename for an initiative that aims to develop an open hardware platform for creating highly modular smartphones. The platform will include a structural frame or endoskeleton that holds smartphone modules of the owner's choice, such as a display, camera or an extra battery. It would allow users to swap out malfunctioning modules or upgrade individual modules as innovations emerge, providing longer lifetime cycles for the handset, and potentially reducing electronic waste. Project Ara smartphone will begin pilot testing in Puerto Rico later 2015 with a target bill of materials cost of \$ 50 for a basic grey phone. The project was originally headed by the Advanced Technologies and Projects team within Motorola Mobility while it was a subsidiary of Google. Although Google had sold Motorola to Lenovo, it is retaining the project team who will work under the direction of the Android division.
+
+\subsection{Project goals}
+Google says the device is designed to be utilized by "6 billion people"; including 1 billion current smartphone users, 5 billion feature phone users, and 1 billion future user not currently connected. Google intends to sell a starter kit where the bill of materials is \$ 50 and includes a frame, display, battery, low-end CPU and WiFi.
+
+Google wants Project Ara to lower the entry barrier for phone hardware manufacturers so there could be "hundreds of thousands of developers" instead of the current handful of big manufacturers. This would be similar to how the Google Play Store is structured. Lowering the barrier for entry allows many more people to develop modules. Anyone will be able to build a module without requiring a license or paying a fee.
+
+\subsection{Structure and features}
+
+Ara Smartphones are built using modules inserted into metal endoskeletal frames known as "endos". The frame will be the only component in an Ara Smartphone made by Google.It acts as the switch to the on-device network linking all the modules together. Two frame sizes will be available at first: "mini", a frame about the size of a Nokia 3310 and "medium", about the size of a LG Nexus 5.In the future, a "large" frame about the size of a Samsung Galaxy Note 3 will be available. Frames have slots on the front for the display and other modules. On the back are additional slots for modules. The data from the modules can be transferred at up to 10 gbps connection. The 2x2 modules have two connections and will allow up to 20 gbps. However, this stack isn't yet included in the Ara Development Kit, that only uses standard I/O such as UART or I2C, providing lower transfer rate.
+
+Modules can provide common smartphone features, such as cameras and speakers, but can also provide more specialized features, such as medical devices, receipt printers, laser pointers, pico projectors, night vision sensors, or game controller buttons. Each slot on the frame will accept any module of the correct size. The front slots are of various heights and take up the whole width of the frame. The rear slots come in standard sizes of 1x1, 1x2 and 2x2. Modules can be hot-swapped without turning the phone off. The frame also includes a small backup battery so the main battery can be hot-swapped.Modules are secured with electropermanent magnets. The enclosures of the modules were planned to be 3D-printed, but due to the lack of development in the technology Google opted instead for a customizable molded case.
+
+Modules will be available both at an official Google store and at third-party stores. Ara Smartphones will only accept official modules by default, but users can change a software setting to enable unofficial modules. This is similar to how Android handles app installations.
+
+\subsection{Project team}
+
+Project Ara was developed and is led by Paul Eremenko from Google ATAP. The core Project Ara team at Google consists of three people with most of the work being done by outside contractors. One of the main contractors is NK Labs, a Massachusetts-based engineering firm, whose co-founder is Ara Knaian after whom the project was named. Another contractor is 3D System.
+
+\subsection{History and development process}
+
+The first version of the developers' kit relies on a prototype implementation of the Ara on-device network using the MIPI UniPro protocol implemented on FPGA and running over an LVDS physical layer with modules connecting via retractable pins. Subsequent versions will soon be built around a much more efficient and higher performance ASIC implementation of UniPro, running over a capacitive M-PHY physical layer.
+
+
+         
 \subsection{Architecture}
