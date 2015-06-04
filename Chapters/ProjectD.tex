@@ -20,11 +20,83 @@ In fact, because of the lake of literature or past experience with the Ara platf
 
 
 
-\subsection{Android for ARA reliable I/O operation rate}
+\subsection{Android for ARA reliable I/O operation rate}  \label{result-ara}
+
+
+\subsubsection{Problematic}
+
+In this part, we would determine the I/O performance between the Ara main board and  modules in order to fit its characteristics: maximum DAC sampling rate, resolution, buffering needs.
+
+We focused on the minimum stable thread execution speed, which fix the number of Android I/O operation per second, then the maximum number of bytes we can read each time.
+
+\subsubsection{Protocol}
+We modify the oxymeter application changing the thread execution interval from 1ms to 100ms and record the effective execution period using time-stamps. To have a set consistent datasets, we record 1 million of sample for each measure. As consequence, we would be able to determine the minimum thread execution period, and its stability.
+This point is particularly important for designing the buffer on the VLC receiver : a bigger I/O operation period than expected will cause overflow, and data loss of data.
+
+To determine the bus speed and the max effective transferred without error for each operation, we replaced the oxymeter module by an Arduino that will write diferents among of data on the bus. In addition, we use a logic analyzer to record what's happening on the bus.
+
+\subsubsection{Results}
+\begin{itemize}
+
+\begin{figure}[h]
+  \begin{minipage}[c]{.46\linewidth}
+    \centering
+    \scalebox{1}{\includegraphics[width=\textwidth]{Pictures/dsp20.png}}
+    \label{fig:dsp20}
+    \rule{16em}{0.5pt}
+    \caption[Waveform on power-linel]{Waveform on power-line}
+  \end{minipage}
+  \hfill%
+  \begin{minipage}[c]{.46\linewidth}
+  \centering
+    \scalebox{1}{\includegraphics[width=\textwidth]{Pictures/dsp50.png}}
+    \label{fig:dsp50}
+    \rule{16em}{0.5pt}
+    \caption[Waveform on power-linel]{Waveform on power-line}
+  \end{minipage}
+\end{figure}
+
+\item Android threads can't reach lower period than 8ms but with an elevate variance, as we can see in .
+
+\item Performing statistical analysis, for each execution period and plotting the effective period distribution and variance, we can consider 30ms as safe.
+
+\item Even if the I2C bus speed clock should be 400kHz - according to the Ara MDK documentation - the effective clock rate is 133kHz.
+On other hand, even if the kernel driver limits I/O operations to 512 bytes, the bus gets corrupted trying to transfer more than 350 bytes per operation.
+\end{itemize}
+
+\subsubsection{Conclusion}  \label{conclusion-ara}
+According to , we should design our VLC receiver module to taking account an effective bit-rate of 92,4 kbps and will developed the Android application with a module polling thread period to 30ms and an I2C transaction . 
+
 
 \subsection{Ara benchmark}
 
-\subsection{Conclusion}
+In addition to \ref{result-ara}, we should be sure that a normal to extensive modular smartphone won't affect VLC module performances, even if the app run in background mode. In this case, the Android CPU governor will reduce the priority of our app, giving it less resources or stopping it if necessary.
+
+In order to do that, we use a benchmark application that would simulate typical smartphone use-case : web browsing, shot-message writing, video playing or games.
+
+During the stress tests, both CPU load and repartitions over running process, and RAM usage are monitored.
+
+\begin{figure}[h]
+  \begin{minipage}[c]{.46\linewidth}
+    \centering
+    \scalebox{0.9}{\includegraphics[width=\textwidth]{Pictures/cpu-singleapp.jpg}}
+    \label{fig:cpu-single}
+    \rule{16em}{0.5pt}
+    \caption[Waveform on power-linel]{Waveform on power-line}
+  \end{minipage}
+  \hfill%
+  \begin{minipage}[c]{.46\linewidth}
+  \centering
+    \scalebox{0.9}{\includegraphics[width=\textwidth]{Pictures/cpu-loadapp.jpg}}
+    \label{fig:cpu-load}
+    \rule{16em}{0.5pt}
+    \caption[Waveform on power-linel]{Waveform on power-line}
+  \end{minipage}
+\end{figure}
+
+For each case, except the video game that made freeze and crash the Ara platform, results where exactly the same than with a single activity - ie. just our application - and we achieve the same bit-rate.
+
+\subsubsection{Conclusion}
 
 
 %----------------------------------------------------------------------------------------
