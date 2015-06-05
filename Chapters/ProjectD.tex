@@ -36,26 +36,30 @@ This point is particularly important for designing the buffer on the VLC receive
 To determine the bus speed and the max effective transferred without error for each operation, we replaced the oxymeter module by an Arduino that will write diferents among of data on the bus. In addition, we use a logic analyzer to record what's happening on the bus.
 
 \subsubsection{Results}
-\begin{itemize}
 
 \begin{figure}[h]
   \begin{minipage}[c]{.46\linewidth}
     \centering
-    \scalebox{1}{\includegraphics[width=\textwidth]{Pictures/dsp20.png}}
+ \includegraphics[width=\textwidth, height=.70\linewidth]{Pictures/dsp20.png}
     \label{fig:dsp20}
     \rule{16em}{0.5pt}
-    \caption[Waveform on power-linel]{Waveform on power-line}
+    \caption[Probability density of Android thread execution interval with 20ms as defined period]{Probability density of Android thread execution interval with 20ms as defined period}
   \end{minipage}
   \hfill%
   \begin{minipage}[c]{.46\linewidth}
-  \centering
-    \scalebox{1}{\includegraphics[width=\textwidth]{Pictures/dsp50.png}}
+  \centering{
+    \scalebox{1}{\includegraphics[width=\textwidth]{Pictures/dsp50.png}}}
     \label{fig:dsp50}
     \rule{16em}{0.5pt}
-    \caption[Waveform on power-linel]{Waveform on power-line}
+    \caption[Probability density of Android thread execution interval with 50ms as defined period]{Probability density of Android thread execution interval with 50ms as defined period}
   \end{minipage}
+  
 \end{figure}
+\begin{center}
+Remark : as value lower than expected have no consequences, we doesn't plot them on the chart, but are taken in account in the probability repartitions.
+\end{center}
 
+\begin{itemize}
 \item Android threads can't reach lower period than 8ms but with an elevate variance, as we can see in .
 
 \item Performing statistical analysis, for each execution period and plotting the effective period distribution and variance, we can consider 30ms as safe.
@@ -65,7 +69,7 @@ On other hand, even if the kernel driver limits I/O operations to 512 bytes, the
 \end{itemize}
 
 \subsubsection{Conclusion}  \label{conclusion-ara}
-According to , we should design our VLC receiver module to taking account an effective bit-rate of 92,4 kbps and will developed the Android application with a module polling thread period to 30ms and an I2C transaction . 
+According to \ref{result-ara}, we should design our VLC receiver module to taking account an effective bit-rate of 92,4 kbps and will developed the Android application with a module polling thread period to 30ms and an I2C transaction . 
 
 
 \subsection{Ara benchmark}
@@ -76,28 +80,45 @@ In order to do that, we use a benchmark application that would simulate typical 
 
 During the stress tests, both CPU load and repartitions over running process, and RAM usage are monitored.
 
-\begin{figure}[h]
-  \begin{minipage}[c]{.46\linewidth}
-    \centering
-    \scalebox{0.9}{\includegraphics[width=\textwidth]{Pictures/cpu-singleapp.jpg}}
+\begin{figure}[htbp]
+    \centering{
+    \scalebox{0.7}{\includegraphics[width=\textwidth]{Pictures/cpu-singleapp.jpg}}}
     \label{fig:cpu-single}
-    \rule{16em}{0.5pt}
-    \caption[Waveform on power-linel]{Waveform on power-line}
-  \end{minipage}
-  \hfill%
-  \begin{minipage}[c]{.46\linewidth}
-  \centering
-    \scalebox{0.9}{\includegraphics[width=\textwidth]{Pictures/cpu-loadapp.jpg}}
+    \rule{35em}{0.5pt}
+    \caption[CPU load and repartition with only Oxymeter application running]{CPU load and repartitions with only Oxymeter application running}
+\end{figure}
+
+
+\begin{figure}[htpb]
+    \centering{
+    \scalebox{0.7}{\includegraphics[width=\textwidth]{Pictures/cpu-loadapp.jpg}}}
     \label{fig:cpu-load}
-    \rule{16em}{0.5pt}
-    \caption[Waveform on power-linel]{Waveform on power-line}
-  \end{minipage}
+    \rule{35em}{0.5pt}
+    \caption[CPU load and repartition during the web navigation simulation]{CPU load and repartition during the web navigation simulation}
 \end{figure}
 
 For each case, except the video game that made freeze and crash the Ara platform, results where exactly the same than with a single activity - ie. just our application - and we achieve the same bit-rate.
 
 \subsubsection{Conclusion}
+{
+Following conclusion in\ref{result-ara}, we are now able to determine the Digital-to-Analogic converter characteristic. In order to get the better ratio as posible between the resolution, the sampling rating, and and the clock rate we can achieve with the LED Driver Emitter,chosen values are summarized in the next table.
 
+\begin{table}[htpb]
+\begin{center}
+\begin{tabular}{|l|c|r|}
+  \hline
+  Sampling Rate & $\approx$ 1 MSPS \\
+  \hline
+  Resolution & 8-12 bits \\
+  \hline
+  Buffer Size & 200 bytes\\
+  \hline
+\end{tabular}
+\end{center}
+\caption{DAC needs summary}
+\label{conclusion-adc}
+\end{table}
+}
 
 %----------------------------------------------------------------------------------------
 %	Receiver circuit design
@@ -105,12 +126,28 @@ For each case, except the video game that made freeze and crash the Ara platform
 
 \section{Receiver circuit design}
 
+In this section, we will focus on the VLC module hardware design, which will have a major impact in the quality and eficienty of our system. 
+
 \subsection{Needs description}
-\subsection{Photodiode}
+
+The VLC receiver front-end circuit must detect with high frequency precision the modulated light within a range starting from 1kHz to 1Mhz. Before digitalization, the current generated by the photodiode has to be converted into current.
+As a major issue in VLC is the interferences - from the ambient light or the Ultraviolet - the signal should be properly filtered and amplified before digitalization.
+
+Our solution is constituted with a photodiode, witch convert the modulate light into current. It's followed by a trans-impedance amplifier in order to convert the photodiode output current into tension. Then, an analogic low-pass filter and gain are applied, before digitalization by the a microcontroller unit.
+
 \subsection{1st AOP : Current to tension converter}
+
+The first part of the circuit is the Trans-Impedance Amplifier, presented in \ref{trans}. TIA is a standard electronic design, and the capicitance and resistance in the feed-back loop are determined to compensate the photodiode capacitance.
+
+
+
 \subsection{2sd: Low Pass filter}
+
+
 \subsection{Gain}
 
+
+\
 %----------------------------------------------------------------------------------------
 %	Emitter driver
 %----------------------------------------------------------------------------------------
