@@ -16,25 +16,6 @@ Visible Light Communication technology.
 
 \section{VLC Implementations}
 
-\subsection{Visible Light Communication System Considered}
-
-An indoor visible light communication system using white LEDs under consideration is
-shown in \ref{fig:vlc-model}. All the lights in the room are replaced by LEDs. The LEDs
-are not only used for illuminating the room but also for an optical wireless
-communication system. On-off Keying Return-to-Zero (OOK-RZ) coding is used for
-modulating white LEDs. Optical lighting and optical transmission of the white LEDs
-have been tested to evaluate the requirements of using VLC for indoor applications. The
-effects of the delay problems faced in the high data rate transmission have been studied
-and presented in .
-
-\begin{figure}[htbp]
-  \centering
-    \scalebox{0.6}{\includegraphics[width=\textwidth]{Pictures/vlc-model-room.png}}
-    \rule{35em}{0.5pt}
-  \caption[VLC Model Room]{VLC Model Room}
-  \label{fig:vlc-model}
-\end{figure}
-
 \subsection{Visible Light Road-to-vehicle Communication Using High-Speed Camera}
 
 LEDs are already being used in traffic lights, and they can be used as the communication
@@ -91,7 +72,7 @@ mobile terminal.
 \end{figure}
 
 Optical communications for outdoor communication has been discussed and elaborated
-upon [4]. Devices such as laptops and mobile phones can be used for transmitting and
+upon [4]. Devices such as laptops an mobile phones can be used for transmitting and
 receiving information, using transceivers, as shown in \ref{fig:vlc-driver}. Transceiver systems use
 both LEDs and photodiodes. Intensity modulation was implemented to reach the most
 viable modulation. Various important design parameters were optimized by using
@@ -108,6 +89,15 @@ with higher light intensity and larger coverage. The static lamp acts
 as a repeater so that more devices can receive the original messages
 and the resulting network connectivity increases.
 
+
+%----------------------------------------------------------------------------------------
+%	SMARTPHONE SOLUTIONS
+%----------------------------------------------------------------------------------------
+
+\section{Smartphone solutions}
+
+Recently, the IEEE released a new task group called IEEE 802.15.7r1 OWC TG to write a revision to IEEE 802.15.7-2011 that accommodates infrared and near ultraviolet wavelengths. In addition to visible light, it also adds options such as optical camera communications, LED-ID (which is wireless light identification system using LED), Li-Fi (which is high-speed, bidirectional, networked mobile wireless communication using light). Some of their researches intend to bring VLC possibility to mobile phones.
+ as visible light communication   
 \subsection{Visible Light Communication using smartphone camera and rolling shutter effect}
 
 Cameras embedded in smartphones can be used as VLC receivers. As a result, common lights and smartphone cameras has the potential to enable a great number
@@ -118,17 +108,13 @@ The performance evaluation results demonstrate that the communication prototype 
 
 \subsection{Visible Light Communication using smartphone ambient light sensor}
 
-%----------------------------------------------------------------------------------------
-%	SMARTPHONE SOLUTIONS
-%----------------------------------------------------------------------------------------
+Other approach as been proposed using the smartphone ambient light sensor as receiver. A light sensor is one of the most common sensors in smartphones, and is located on it’s surface above the screen. Since the screen of a smartphone is a major factor in draining its battery, an ambient light sensor is used to recognize the brightness of its surroundings and adapt the screen backlight to save battery power while optimizing the visibility. Some researches leverage this sensor for indoor localization or secure authentication purpose.  The It's the case of FIRE system presented in \citep{ambsensorsecure}. FIRE takes advantage of a smartphone’s ambient light sensor and uses a challenge-based programmable light-emitting token generator. They have designed and prototyped an inexpensive passcode encoder and LED light-emitting hardware. Their experiments validated that FIRE can authenticate a user on a smartphone building a bi-directional communication channel based VLC.
 
-\section{Smartphone solutions}
+\begin{figure}[htbp]
+  \centering
+    \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/fire.png}}
+    \rule{35em}{0.5pt}
+  \caption[FIRE use case]{FIRE use case}
+  \label{fig:fire}
+\end{figure}
 
-\subsection{Camera}
-\subsection{External peripheral}
-
-%----------------------------------------------------------------------------------------
-%	CURRENT RESEARCHES
-%----------------------------------------------------------------------------------------
-
-\section{Current researches}

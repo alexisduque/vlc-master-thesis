@@ -18,10 +18,7 @@ In fact, because of the lake of literature or past experience with the Ara platf
 
 \subsection{MDK and boards study}
 
-
-
 \subsection{Android for ARA reliable I/O operation rate}  \label{result-ara}
-
 
 \subsubsection{Problematic}
 
@@ -145,10 +142,10 @@ Our solution is constituted with a photodiode, witch convert the modulate light 
     \label{fig:tia}
 \end{figure}
 
-The first part of the circuit is the Trans-Impedance Amplifier, presented in \ref{fig:tia}. TIA is a standard electronic pattern, used to convert the current to a tension.
+The first part of the circuit is the Trans-Impedance Amplifier, presented in \ref{fig:tia}. TIA is a standard electronic pattern made from an operational amplifier and a resistor to convert the current to a tension.
 
-MCP6292 AOP is alimented with the 3.3V tension source from the MCU.
-The DC output voltage due to the photodiode is given by \ref{eq:vout}
+We choose the MCP6292 Op-Amp for its 10MHz wide band pass, and 3.3V input voltage. Indeed, the interesting input frequency  from modulated light won't be greater than 1MHz and we will be able supply it with the MCU.
+The DC output voltage due to the photodiode is given by \ref{eq:vout} 
 
 \begin{equation}
 V_{OUT}  = I_{DI} * R_{1}
@@ -217,18 +214,39 @@ G_{OUT}  = \frac{R_{4}}{R_{5}}
 
 
 %----------------------------------------------------------------------------------------
-%	Receiver CAN and Buffer
+%	Receiver ADC and Buffer
 %----------------------------------------------------------------------------------------
 
-\section{Receiver DAC and Buffer}
+\section{Receiver ADC and Buffer}
 In this section, we will describe the digitalization and digital processing performed by the VLC receiver module, just  after the front-end circuit.
 
-\subsection{Digitalization}
-According to \ref{tab:conclusion-adc}, we chose to use the STM32L0 miro-controller based on an ARM Cortex  M0+ processor. 
-\subsection{Decoding}
+\subsection{Hardware choice}
 
-\subsection{Buffering}
-\subsection{Input/output}
+According to \ref{tab:conclusion-adc}, we chose to use the STM32L0 micro-controller based on an ARM Cortex  M0+ processor with these characteristics :
+\begin{itemize}
+\item Processor Frequency up to 32 MHz: it will let us embedded some signal processing in order to reduce the computation on the Android.
+\item Low power consumption : 87 $\mu$A/MHz: it's a key feature for the mobile battery harvesting.
+\item Analogical Input with 1.1 MSPS ADC : it fits our requirements.
+\item Different I/O, including I2C : it's a requirement to connect the MCU to the MDK endpoint board.
+\item 8kB RAM : this feature will let us implements the buffering using software memory.
+\end{itemize}
+
+\subsection{Software implementation}
+
+We developed the MCU software in C, using the Arm GCC tool-chain and ST-Link debugger interface included in the Em::Blocks \citep{emblocks} IDE.
+
+The MCU is initialized setting the HSI as source clock with 32MHZ as processor frequency. Only $I^2C$, UART, ADC are enabled.
+
+The main program works in interrupt mode. 
+
+\subsubsection{Digitalization}
+
+The ADC sampling rate is set to 
+\subsubsection{Decoding}
+
+\subsubsection{Buffering}
+
+\subsubsection{Input/output}
 
 %----------------------------------------------------------------------------------------
 %	Ara Android App
@@ -275,7 +293,7 @@ The Ara MDK is provided with an operating system level driver, developed in C, t
 However, this C interface, can't be directly used through the Java API. In order to give the possibility to perform I2C operations in our Android application, we develop a JNI interface that would wrap the C driver into a Java package.
 So we define 2 Java classes : 
 \begin{itemize}
-\item I2CManager : it configures the i2c bus, by using UNIX I2C kernel driver and execute I2CTransaction.
+\item I2CManager : it configures the i2c bus, by using UNIX I2C kernel driver and execute operations defined in I2CTransaction.
 \item I2CTransaction : it represents read or write operation on the bus.
 \end{itemize}
 
