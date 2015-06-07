@@ -22,7 +22,7 @@ In fact, because of the lake of literature or past experience with the Ara platf
 
 \subsubsection{Problematic}
 
-In this part, we would determine the I/O performance between the Ara main board and  modules in order to fit its characteristics: maximum DAC sampling rate, resolution, buffering needs.
+In this part, we would determine the I/O performance between the Ara main board and  modules in order to fit its characteristics: maximum ADC sampling rate, resolution, buffering needs.
 
 We focused on the minimum stable thread execution speed, which fix the number of Android I/O operation per second, then the maximum number of bytes we can read each time.
 
@@ -241,12 +241,29 @@ The main program works in interrupt mode.
 
 \subsubsection{Digitalization}
 
-The ADC sampling rate is set to 
+The ADC sampling rate is set to 1,1 MSPS, in order to get the higher frequency precision, and the resolution to 8 bits, sufficient for OOK modulation.
+
+The acquisition is done using buffering and Direct Memory Access (DMA) mode. 
+When the DMA buffer is full, an interruption is thrown. 
+
 \subsubsection{Decoding}
+
 
 \subsubsection{Buffering}
 
+After being decoded , bits are pushed into a FIFO Buffer implemented in 
+
+\lstinputlisting[language=C, caption=fifo.c ,label=DescriptiveLabel, firstline=37, lastline=45]{CodeReceiver/main.c}
+
 \subsubsection{Input/output}
+ 
+\begin{enumerate}
+\item UART peripheral is enabled only when debugging or saving measure to the laptop via Serial->USB port.
+
+\item I$^2$c is enabled in slave mode and connected to the Ara module development board. An interruption is thrown when a read request is detected from the master peripheral driven by the Android application.
+
+The function called in the interruption callback get last 
+\end{enumerate}
 
 %----------------------------------------------------------------------------------------
 %	Ara Android App
@@ -297,7 +314,4 @@ So we define 2 Java classes :
 \item I2CTransaction : it represents read or write operation on the bus.
 \end{itemize}
 
-Class methods are detailed in the Anexxe.
-
-\subsection{Results}
-\subsection{Interpretation}
+Class methods are detailed in the \citep{an:e}.

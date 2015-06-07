@@ -24,7 +24,7 @@ In this way, we don't need to use a smartphone peripheral, such as USB, or Bluet
 
 The system, that we develop as part of this project consist in a commercial LED emitter, driven by a STM32L0 micro-controller unit, in order to transmit the OOK modulated signal. Before that, we propose to encode data using 4B6B or Manchester, in order to perform different experimentation and compare the result.
 
-Considering the receiver module, our light sensor consist in a fotodiode followed by several electronic circuit : current to tension converter, low-pass filter and positive gain amplifier.
+Considering the receiver module, our light sensor consist in a photodiode followed by several electronic circuit : current to tension converter, low-pass filter and positive gain amplifier.
 
 The analog to digital conversion has been realized at 1,1 MSPS by the micro-controller unit. To fit the platform requirement and optimize the throughput, it performs several operations such as thresholding, decoding and buffering.
 
@@ -40,4 +40,4 @@ Finally, we develop a basic Android application for the platform, that implement
 \section{VLC Contribution}
 
 
-Our approach would demonstrate a new VLC usage and possibility carrying an improved among of data the the user smartphone. Even if we follow IEEE 802.15.7 standard recommendation for PHY mode , we propose associating OOK modulation with 4B6B coding, in order to improve emitted light power, avoid flickering, and increase the number of bit per symbol. In addition, we increase the emitter clock rate, up to 560kHz.
+Our approach would demonstrate a new VLC usage and possibility carrying an improved among of data the the user smartphone. Even if we follow IEEE 802.15.7 standard recommendation for PHY mode , we propose to combine OOK modulation with 4B6B coding, in order to improve emitted light power, avoid flickering, and improve the number of bit per symbol. In addition, we increase the emitter clock rate, up to 560kHz.
