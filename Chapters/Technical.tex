@@ -218,10 +218,24 @@ Manchester coding (also known as phase encoding, or PE) is a line code in which 
 
 It has a code rate of 1⁄2, maximum Runlength of 2.
 It is commonly used at 10Base-T Ethernet or RFID and has been proposed in the VLC standard to avoid the flickering issue.
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|c|c|r|}
+  \hline
+ bit & symbol \\
+  \hline
+  0 & 01 \\
+  1 & 10 \\
+  \hline
+\end{tabular}
+\end{center}
+\caption{Manchester RLL code}
+\label{tab:manchester}
+\end{table}
 
 \begin{figure}[htbp]
   \centering
-    \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/manchester.png}}
+    \scalebox{0.6}{\includegraphics[width=\textwidth]{Pictures/manchester.png}}
     \rule{35em}{0.5pt}
   \caption[Manchester encoding]{Manchester encoding}
   \label{fig:manchester}
@@ -324,9 +338,10 @@ It should be wired to the Endoskeleton Switch Board with 8 SMA coaxial cables
 
 \subsubsection{Endoskeleton Switch Dev Board}\
 
-This board is the devlopement kit for the endoskeleton where each module will be connected.
+This board is the development kit for the endoskeleton where each module will be connected.
 It's a bridge between the application processor and the module using UniPro high-speed interface.
 The Ara team also introduced a new software protocol called Greybus, which handles the communications between the endoskeleton and the module at an higher level, making a convenient way for module developers to manipulate the UniPro stack.
+
 \begin{figure}[htbp]
   \centering
     \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/endo.png}}
@@ -334,15 +349,22 @@ The Ara team also introduced a new software protocol called Greybus, which handl
   \caption[Ara Endoskeleton Switch Board]{Ara Endoskeleton Switch Dev Board}
   \label{fig:endo}
 \end{figure}
+
 \begin{figure}[htbp]
   \centering
-    \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/unipro.png}}
-    \rule{35em}{0.5pt}
-  \caption[UniPro interface]{UniPro interface}
+    \makebox[\textwidth][c]{
+      \scalebox{0.8}{\includegraphics[width=\textwidth]{Pictures/unipro.png}}
+     }
+     \rule{35em}{0.8pt}
+  \caption[Module to Module Communication (with Native UniPro Support and Bridge ASICs)]{Module to Module Communication (with Native UniPro Support and Bridge ASICs)}
   \label{fig:endo}
 \end{figure}
 
 \subsubsection{GP Endpoint board}
+
+The Generic Endpoint is the development board to quickly prototype module. In fact, it's a kind of "base" module on which we would be able to wired our harware using standard protocols. The board provide a set of Input/Output such as GPIO, I$^2$C, 5v and 3.3V output.
+
+As the AP Board, it should be connected to the endoskeleton UniPro bus with 8 SMA coaxial cables.
 
 \begin{figure}[htbp]
   \centering
@@ -351,4 +373,3 @@ The Ara team also introduced a new software protocol called Greybus, which handl
   \caption[Ara Generic Endpoint Board]{Ara Generic Endpoint Board}
   \label{fig:gpendpoint}
 \end{figure}
-

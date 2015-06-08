@@ -1,10 +1,10 @@
 /**
-  ******************************************************************************
+  ***********************************************************************
   * File Name          : Src/fifo.c
   * Date               : 05/04/2015 10:49:20
   * Description        : This file provides code for the configuration
   *                      of the FIFO ABD Buffer.
-  ******************************************************************************
+  ***********************************************************************
   */
 
 #include <stdint.h>
@@ -12,7 +12,7 @@
 #include <string.h>
 #include "fifo.h"
 
-//--------------------------------------------------------------------------------------------------
+
 void FIFO_init(FIFO_t *fifo, void *bufptr, size_t bufsize)
 {
     fifo->bufptr = bufptr;
@@ -24,7 +24,6 @@ void FIFO_init(FIFO_t *fifo, void *bufptr, size_t bufsize)
 #endif
 }
 
-//--------------------------------------------------------------------------------------------------
 RES_t FIFO_write(FIFO_t *fifo, void *src, size_t size)
 {
     size_t wrcount;
@@ -63,7 +62,6 @@ RES_t FIFO_write(FIFO_t *fifo, void *src, size_t size)
     return(RES_OK);
 }
 
-//--------------------------------------------------------------------------------------------------
 void FIFO_write_trample(FIFO_t *fifo, void *src, size_t size)
 {
 
@@ -119,7 +117,6 @@ void FIFO_write_trample(FIFO_t *fifo, void *src, size_t size)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
 RES_t FIFO_read(FIFO_t *fifo, void *dst, size_t size)
 {
     size_t rdcount;
@@ -156,7 +153,6 @@ RES_t FIFO_read(FIFO_t *fifo, void *dst, size_t size)
     return(RES_OK);
 }
 
-//--------------------------------------------------------------------------------------------------
 size_t FIFO_read_max(FIFO_t *fifo, void *dst, size_t max_size)
 {
     size_t rdcount, nbytes;
@@ -195,7 +191,6 @@ size_t FIFO_read_max(FIFO_t *fifo, void *dst, size_t max_size)
     return(max_size);
 }
 
-//--------------------------------------------------------------------------------------------------
 RES_t FIFO_peek(FIFO_t *fifo, void *dst, size_t size)
 {
     size_t rdcount;
@@ -228,14 +223,12 @@ RES_t FIFO_peek(FIFO_t *fifo, void *dst, size_t size)
     return(RES_OK);
 }
 
-//--------------------------------------------------------------------------------------------------
 void FIFO_clear(FIFO_t *fifo)
 {
     fifo->rdidx = 0;
     fifo->wridx = 0;
 }
 
-//--------------------------------------------------------------------------------------------------
 size_t FIFO_rdcount(FIFO_t *fifo)
 {
     size_t wridx,rdidx;
@@ -252,7 +245,7 @@ size_t FIFO_rdcount(FIFO_t *fifo)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 size_t FIFO_wrcount(FIFO_t *fifo)
 {
     size_t wridx,rdidx;
@@ -271,4 +264,4 @@ size_t FIFO_wrcount(FIFO_t *fifo)
 
 ///\}
 
-/*****************************END OF FILE**************************************/
+/*****************************END OF FILE*********************************/
