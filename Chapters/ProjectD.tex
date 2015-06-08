@@ -257,7 +257,7 @@ To compare the performance between different RLL coding, Manchester has been imp
 
 \subsection{Transmission Pattern} \label{frame}
 
-We propose a transmission pattern that would easly permit clock synchronization on the receiver. In addition, it has been designed taking account of the flickering and dimming issue.
+We propose a transmission pattern that would easyly permits clock synchronization on the receiver. In addition, it has been designed taking account of the flickering and dimming issue.
 
 Three transmissions state are defined : 
 \begin{itemize}
@@ -355,9 +355,9 @@ Then as we know exactly the data frame and structure, we would be able to read t
 \subsubsection{Buffering}
 
 
-After being decoded , bits are pushed into a FIFO Buffer implemented in \ref{fifo.c}
+After being decoded , bits are pushed into a FIFO Buffer implemented in \ref{codereceiver}
 
-\lstinputlisting[language=C, caption=fifo.c ,label=DescriptiveLabel, firstline=37, lastline=45]{CodeReceiver/main.c}
+\lstinputlisting[language=C, caption=fifo.h ,label=fifodef, firstline=37, lastline=45]{CodeReceiver/fifo.h}
 
 \subsubsection{Input/output}
  

@@ -303,13 +303,16 @@ The first version of the developers' kit relies on a prototype implementation of
 \subsection{Module Developemement Kit Architecture}
 
 The Module Developper Kit (MDK) we will consider is the v0.11, even if a new one - v0.2 - has been released in January, just after the Google Ara Developer Conference.
-The kit contains three dev boards and a bunch of cables. The dev boards are an application processor (AP) board, a Generic Endpoint Dev Board and an Endo Switch Dev Board.
+The kit contains three dev boards and a bunch of SMA cables. The dev boards are an application processor (AP) board, a Generic Endpoint Dev Board and an Endo Switch Dev Board.
 
 \subsubsection{Android AP board}
 
-The Application Processor Board is development kit for the Android Operating system giving convenient way to modify or update the OS.
+The Application Processor Board is development kit for the Android Operating system giving convenient way to modify or update the OS. It's the core of the Ara smartphone.
 
-The plateform is base
+Board processor is an ARMv7 and operating system base on Android Pandora (API 18).
+
+It should be wired to the Endoskeleton Switch Board with 8 SMA coaxial cables
+
 
 \begin{figure}[htbp]
   \centering
@@ -319,13 +322,23 @@ The plateform is base
   \label{fig:ap-board}
 \end{figure}
 
-\subsubsection{Endoskeleton}
+\subsubsection{Endoskeleton Switch Dev Board}\
 
+This board is the devlopement kit for the endoskeleton where each module will be connected.
+It's a bridge between the application processor and the module using UniPro high-speed interface.
+The Ara team also introduced a new software protocol called Greybus, which handles the communications between the endoskeleton and the module at an higher level, making a convenient way for module developers to manipulate the UniPro stack.
 \begin{figure}[htbp]
   \centering
     \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/endo.png}}
     \rule{35em}{0.5pt}
-  \caption[Ara Endoskeleton Switch Board]{Ara Endoskeleton Switch Board}
+  \caption[Ara Endoskeleton Switch Board]{Ara Endoskeleton Switch Dev Board}
+  \label{fig:endo}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+    \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/unipro.png}}
+    \rule{35em}{0.5pt}
+  \caption[UniPro interface]{UniPro interface}
   \label{fig:endo}
 \end{figure}
 
