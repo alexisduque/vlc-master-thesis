@@ -90,7 +90,7 @@ discuss the most commonly used.
 
 \begin{enumerate}
 
-\item On-Off-Keying (OOK), or amplitude shift keying, uses keying (switching) to
+\item \label{ook} On-Off-Keying (OOK), or amplitude shift keying, uses keying (switching) to
 turn a carrier signal on and off. OOK has a low processing burden but is
 proven to be very sensitive to noise. Enhanced schemes like On-Off-Keying
 Non-Return-to-Zero have shown data rates of 1.5 Gigabits per seconds,
@@ -203,13 +203,73 @@ than other sensors.
 
 \end{enumerate}
 
-\subsection{Line coding}
+\subsection{Run-length limited coding} \label{rll}
 
-IEEE 802.15.7 standard suggests use different lines for VLC PHY I, that can be use with OOK or VVMN modulation.
+Line coding technique are used to send arbitrary data over a communications channel with bandwidth
+limits.
+It bounds the length of stretches (runs) of repeated bits during which the signal does not change
+If the runs are too long clock recovery is difficult, while if they are too short, the high frequencies
+might be attenuated by the communications channel.
 
+IEEE 802.15.7 standard suggests use different RLL code for VLC PHY I, that can be use with OOK or VVMN modulation.
 \subsubsection{Manchester}
 
+Manchester coding (also known as phase encoding, or PE) is a line code in which the encoding of each data bit has at least one transition and occupies the same time. It therefore has no DC component, and is self-clocking, which means that it may be inductively or capacitively coupled, and that a clock signal can be recovered from the encoded data.
+
+It has a code rate of 1⁄2, maximum Runlength of 2.
+It is commonly used at 10Base-T Ethernet or RFID and has been proposed in the VLC standard to avoid the flickering issue.
+
+\begin{figure}[htbp]
+  \centering
+    \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/manchester.png}}
+    \rule{35em}{0.5pt}
+  \caption[Manchester encoding]{Manchester encoding}
+  \label{fig:manchester}
+\end{figure}
+
 \subsubsection{4B6B}
+
+4B6B expands 4-bit codes to 6-bit symbols with same ratio of 1 and 0 (3:3) and 50 percent duty cycle
+It supports clock recovery and DC-balanced waveform.
+
+4B6B main advantages are : 
+
+\begin{itemize}
+\item Free from intra-frame flickering
+\item Error detection
+\item Easier clock recovery
+\item DC balancing
+\item Short run length
+\end{itemize}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|c|r|}
+  \hline
+  4 bits & 6 bits \\
+  \hline
+  0000 & 001110 \\
+  0001 & 001101 \\
+  0010 & 010011 \\
+  0011 & 010110 \\
+  0100 & 010101 \\
+  0101 & 100011 \\
+  0110 & 100110 \\
+  0111 & 100101 \\
+  1000 & 011001 \\
+  1001 & 011010 \\
+  1010 & 011100 \\
+  1011 & 110001 \\
+  1100 & 110010 \\
+  1101 & 101001 \\
+  1110 & 101010 \\
+  1111 & 101100 \\
+  \hline
+\end{tabular}
+\end{center}
+\caption{4B6B RLL code}
+\label{tab:4b6b}
+\end{table}
 
 \subsubsection{8B10B}
 
