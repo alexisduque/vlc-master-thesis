@@ -114,7 +114,10 @@
 \usepackage{listings}
 \usepackage{lstpatch}
 \usepackage{textcomp}
-\usepackage{xcolor} 
+\usepackage{xcolor}	
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \lstset{captionpos=b,
         frame=tb,
         basicstyle=\scriptsize\ttfamily,

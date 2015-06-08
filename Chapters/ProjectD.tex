@@ -98,7 +98,7 @@ For each case, except the video game that made freeze and crash the Ara platform
 
 \subsubsection{Conclusion}
 {
-Following conclusion in\ref{result-ara}, we are now able to determine the Digital-to-Analogic converter characteristic. In order to get the better ratio as possible between the resolution, the sampling rating, and and the clock rate we can achieve with the LED Driver Emitter,chosen values are summarized in the next table.
+Following conclusion in\ref{result-ara}, we are now able to determine the Digital-to-Analogic converter characteristic. In order to get the better ratio as possible between the resolution, the sampling rating, and and the clock rate we can achieve with the LED driver emitter,chosen values are summarized in the next table.
 
 \begin{table}[htbp]
 \begin{center}
@@ -268,26 +268,46 @@ Three transmissions state are defined :
 The table \ref{tab:trans2} shows the transmission of the number 2, 16 bits encoded : 0000 0000 0000 0010.
 
 \begin{table}[htbp]
-\begin{center}
-\makebox[\textwidth][c]{\begin{tabular}{|c|c|c|c|}
-  \hline
-  Idle & Preamble & Data & Idle \\
-  \hline
-  000111 111000 000111 & 110100 001011 & 001111 001111 001111 011011 & 000111 111000 000111 \\
-  \hline
-\end{tabular}}
-\end{center}
-\caption{A transmission example : 2 (16-bits)}
-\label{tab:trans2}
+  \begin{center}
+    \makebox[\textwidth][c]{
+      \begin{tabular}{|c|c|c|c|}
+        \hline
+        Idle & Preamble & Data & Idle \\
+        \hline
+        000111 111000 000111 & 110100 001011 &
+        001111 001111 001111 011011 & 000111 111000 000111 \\
+        \hline
+      \end{tabular}
+    }
+  \end{center}
+  \caption{A transmission example : 2 (16-bits)}
+  \label{tab:trans2}
 \end{table}
 
 
 \end{itemize}
 \subsection{Algorithm}
+To evaluate our system, the micro-controller has been programmed as a 16bits counter, sending periodically - or using the development board button to random timing - the increased value, as defined in algorithm \ref{alg:emitter}.
 
+\begin{algorithm}\label{alg:emitter}
 
+\caption{VLC Emitter main loop}
 
-
+\begin{algorithmic}
+    \State $time \Leftarrow O$
+    \State $counter \Leftarrow O$
+    \While{$1$}
+      \If{$time \geq 25$}
+          \State send preamble;
+          \State send 4B6B counter value;
+          \State $counter \Leftarrow counter+1$
+      \Else
+          \State send idle;
+    \EndIf
+    \State $time \Leftarrow time+1$
+    \EndWhile
+\end{algorithmic}
+\end{algorithm}
 
 %----------------------------------------------------------------------------------------
 %	Receiver ADC and Buffer
@@ -328,7 +348,7 @@ First step is the the OOK demodulation that consisting in applying a threshold t
 
 \lstinputlisting[language=C, caption=Thresholding implementation ,label=Thresholding, firstline=159, lastline=163]{CodeReceiver/adc.c}
 
-As explain in \ref{frame}, we should detect the preamble pattern - 00011000000 - that would help synchronize both emitter and receiver.
+As explain in \ref{frame}, we should detect the preamble pattern - \textbf{110100001011} - that would help synchronize both emitter and receiver.
 Then as we know exactly the data frame and structure, we would be able to read the 4B6B encoded data.
 
 
@@ -346,7 +366,9 @@ After being decoded , bits are pushed into a FIFO Buffer implemented in \ref{fif
 
 \item I$^2$c is enabled in slave mode and connected to the Ara module development board. An interruption is thrown when a read request is detected from the master peripheral driven by the Android application.
 
-The function called in the interruption callback get last 
+The function called in the interruption callback flush the last 350 bits, to send it to the I$^2$c.
+\lstinputlisting[language=C, caption=I$^2$c interrupt Callback ,label=i2cinter, firstline=122, lastline=127]{CodeReceiver/i2c.c}
+
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------
@@ -358,9 +380,9 @@ The function called in the interruption callback get last
 In this part, we describe the Android application that we have developed, to support our VLC receiver module.
 
 \subsection{Application structure and operations}
-Our application as been developed used Google Android API 18, to be compliant with the operating system version which has been installed on the AP Board.
+Our application as been developed using Android Studio IDE with Gradle build toolchain. The target SDK API version is number 18, to be compliant with the operating system version which has been installed on the AP Development Board.
 
-The application package has been called respecting Java name convention : edu.upc.entel.wng.vlcAraModule and content 3 classes :
+The application package has been called respecting Java name convention : edu.upc.entel.wng.vlcAraModule and contents 3 classes :
 
 \begin{itemize}
 \item VLCAraActivity : initialize the application and user interface. It surcharges the Activity class , as requested by the Android API.
