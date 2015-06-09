@@ -29,10 +29,11 @@ In addition, we used on oscilloscope to check the circuit output and control the
 The emitter light was alimented with a 28 Volts power supply.
 
 About the distance/illumination, probes have been realized in a range of 75 to 300 centimeters to match an indoor possible usage. On other side, the clock frequency has been limited to 560kHz, considering the ADC sampling rate - 1,1 MSPS - and the Nyquist-Shannon theorem.
+
 \begin{figure}[htbp]
   \centering
     \makebox[\textwidth][c]{
-      \scalebox{0.}{\includegraphics{Pictures/receiver_setup.jpg}
+      \scalebox{0.4}{\includegraphics{Pictures/receiver_setup.jpg}
     }}
     \rule{35em}{0.5pt}
   \caption[The ARA MDK and its VLC receiver module]{The ARA MDK and its VLC receiver module}
@@ -43,6 +44,17 @@ About the distance/illumination, probes have been realized in a range of 75 to 3
 
 The received signal was measured at different step of the analogical processing, using the 2 oscilloscope voice at different point of our circuit.
 
+\begin{figure}[htbp]
+	\centering
+	\makebox[\textwidth][c]{
+		\scalebox{0.6}{\includegraphics{Pictures/circuit-compare.png}
+	}}
+		\rule{35em}{0.5pt}
+		\caption[In yellow the signal just after the TIA. In blue, the signal after analogical filtering - 2,5 meter distance]{In yellow the signal just after the TIA. In blue, the signal after analogical filtering - 2,5 meter distance}
+		\label{fig:circuit-compare}
+	\end{figure}
+	
+\subsection{Digitalization and demodulation}
 
 
 \subsection{Bit Error Rate}
@@ -67,9 +79,9 @@ The BER, just before 4B6B decoding, was computed for different illumination leve
 \label{tab:ber}
 \end{table}
 
-Considering table \ref{ber} 2,5 meters distance and 10$^-3$ as admissible BER, we can assume that using a 380kHz clock rate can be used for a correct transmission. 
+Considering table \ref{tab:ber} 2,5 meters distance and 10$^-3$ as admissible BER, we can assume that using a 380kHz clock rate can be used for a correct transmission. 
 
-In that case, with 4B6B coding, we can a raw throughput of 253 kbps. 
+In that case, with 4B6B coding, we obtain a raw throughput of 253 kbps. 
 %----------------------------------------------------------------------------------------
 %	RESULTS AND INTERPRETATION-----------------------
 
