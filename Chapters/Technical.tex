@@ -311,20 +311,20 @@ Modules will be available both at an official Google store and at third-party st
 
 \subsection{Project team}
 
-Project Ara was developed and is led by Paul Eremenko from Google ATAP. The core Project ARA team at Google consists of three people with most of the work being done by outside contractors. One of the main contractors is NK Labs, a Massachusetts-based engineering firm, whose co-founder is ARA Knaian after whom the project was named. Another contractor is 3D System.
+Project ARA was developed and is led by Paul Eremenko from Google ATAP. The core Project ARA team at Google consists of three people with most of the work being done by outside contractors. One of the main contractors is NK Labs, a Massachusetts-based engineering firm, whose co-founder is ARA Knaian after whom the project was named. Another contractor is 3D System.
 
 \subsection{History and development process}
 
-The first version of the developers' kit relies on a prototype implementation of the Ara on-device network using the MIPI UniPro protocol implemented on FPGA and running over an LVDS physical layer with modules connecting via retractable pins. Subsequent versions will soon be built around a much more efficient and higher performance ASIC implementation of UniPro, running over a capacitive M-PHY physical layer.
+The first version of the developers' kit relies on a prototype implementation of the ARA on-device network using the MIPI UniPro protocol implemented on FPGA and running over an LVDS physical layer with modules connecting via retractable pins. Subsequent versions will soon be built around a much more efficient and higher performance ASIC implementation of UniPro, running over a capacitive M-PHY physical layer.
          
 \subsection{Module Development Kit Architecture}
 
-The Module Developper Kit (MDK) we will consider is the v0.11, even if a new one - v0.2 - has been released in January, just after the Google Ara Developer Conference.
+The Module Developper Kit (MDK) we will consider is the v0.11, even if a new one - v0.2 - has been released in January, just after the Google ARA Developer Conference.
 The kit contains three dev boards and a bunch of SMA cables. The dev boards are an application processor (AP) board, a Generic Endpoint Dev Board and an Endo Switch Dev Board.
 
 \subsubsection{Android AP board}
 
-The Application Processor Board is development kit for the Android Operating system giving convenient way to modify or update the OS. It's the core of the Ara smartphone.
+The Application Processor Board is development kit for the Android Operating system giving convenient way to modify or update the OS. It's the core of the ARA smartphone.
 
 Board processor is an ARMv7 and operating system base on Android Pandora (API 18).
 
@@ -335,7 +335,7 @@ It should be wired to the Endoskeleton Switch Board with 8 SMA coaxial cables
   \centering
     \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/APDevBoard.png}}
     \rule{35em}{0.5pt}
-  \caption[Ara Application Processor Board]{Ara Application Processor Board}
+  \caption[ARA Application Processor Board]{ARA Application Processor Board}
   \label{fig:ap-board}
 \end{figure}
 
@@ -343,13 +343,13 @@ It should be wired to the Endoskeleton Switch Board with 8 SMA coaxial cables
 
 This board is the development kit for the endoskeleton where each module will be connected.
 It's a bridge between the application processor and the module using UniPro high-speed interface.
-The Ara team also introduced a new software protocol called Greybus, which handles the communications between the endoskeleton and the module at an higher level, making a convenient way for module developers to manipulate the UniPro stack.
+The ARA team also introduced a new software protocol called Greybus, which handles the communications between the endoskeleton and the module at an higher level, making a convenient way for module developers to manipulate the UniPro stack.
 
 \begin{figure}[htbp]
   \centering
     \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/endo.png}}
     \rule{35em}{0.5pt}
-  \caption[Ara Endoskeleton Switch Board]{Ara Endoskeleton Switch Dev Board}
+  \caption[ARA Endoskeleton Switch Board]{ARA Endoskeleton Switch Dev Board}
   \label{fig:endo}
 \end{figure}
 
@@ -373,10 +373,10 @@ As the AP Board, it should be connected to the endoskeleton UniPro bus with 8 SM
   \centering
     \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/genericendpoint.png}}
     \rule{35em}{0.5pt}
-  \caption[Ara Generic Endpoint Board]{Ara Generic Endpoint Board}
+  \caption[ARA Generic Endpoint Board]{ARA Generic Endpoint Board}
   \label{fig:gpendpoint}
 \end{figure}
 
 \subsubsection{MDK Configuration and Setup}
 
-See the document in Appendix \ref{Ara}
+See the document in Appendix \ref{ARA}

@@ -7,14 +7,14 @@
 \lhead{Chapter 5. \emph{Project Description}}
 
 %----------------------------------------------------------------------------------------
-%	Ara platform discovery
+%	ARA platform discovery
 %----------------------------------------------------------------------------------------
 
-\section{Ara platform study}
+\section{ARA platform study}
 
 In this section, we will describe different studies and preliminary experimentation we've done before designing  the module.
 
-In fact, because of the lake of literature or past experience with the Ara platform, we first need to study the Ara Module Development Kit send by Google ATAP. We focus on understanding the role of each board, and there I/O - regarding protocols and speed. Then we determine the reliable rate on witch the operating system can execute a single task - such as I/O operation. Finally we perform some benchmark and CPU load test. 
+In fact, because of the lake of literature or past experience with the ARA platform, we first need to study the ARA Module Development Kit send by Google ATAP. We focus on understanding the role of each board, and there I/O - regarding protocols and speed. Then we determine the reliable rate on witch the operating system can execute a single task - such as I/O operation. Finally we perform some benchmark and CPU load test. 
 
 \subsection{MDK and boards study}
 
@@ -22,7 +22,7 @@ In fact, because of the lake of literature or past experience with the Ara platf
 
 \subsubsection{Problematic}
 
-In this part, we would determine the I/O performance between the Ara main board and  modules in order to fit its characteristics: maximum ADC sampling rate, resolution, buffering needs.
+In this part, we would determine the I/O performance between the ARA main board and  modules in order to fit its characteristics: maximum ADC sampling rate, resolution, buffering needs.
 
 We focused on the minimum stable thread execution speed, which fix the number of Android I/O operation per second, then the maximum number of bytes we can read each time.
 
@@ -61,7 +61,7 @@ Remark : as value lower than expected have no consequences, we doesn't plot them
 
 \item Performing statistical analysis, for each execution period and plotting the effective period distribution and variance, we can consider 30ms as safe.
 
-\item Even if the I2C bus speed clock should be 400kHz - according to the Ara MDK documentation - the effective clock rate is 133kHz.
+\item Even if the I2C bus speed clock should be 400kHz - according to the ARA MDK documentation - the effective clock rate is 133kHz.
 On other hand, even if the kernel driver limits I/O operations to 512 bytes, the bus gets corrupted trying to transfer more than 350 bytes per operation.
 \end{itemize}
 
@@ -69,9 +69,9 @@ On other hand, even if the kernel driver limits I/O operations to 512 bytes, the
 According to \ref{result-ara}, we should design our VLC receiver module to taking account an effective bit-rate of 92,4 kbps and will developed the Android application with a module polling thread period to 30ms and an I2C transaction . 
 
 
-\subsection{Ara benchmark}
+\subsection{ARA benchmark}
 
-In addition to \ref{result-ara}, we should be sure that a normal to extensive modular smartphone won't affect VLC module performances, even if the app run in background mode. In this case, the Android CPU governor will reduce the priority of our app, giving it less resources or stopping it if necessary.
+In addition to \ref{result-ara}, we should be sure that a normal to extensive modular smartphone won't affect VLC module performances, even if the application run in background mode. In this case, the Android CPU governor will reduce the priority of our application, giving it less resources or stopping it if necessary.
 
 In order to do that, we use a benchmark application that would simulate typical smartphone use-case : web browsing, shot-message writing, video playing or games.
 
@@ -79,10 +79,10 @@ During the stress tests, both CPU load and repartitions over running process, an
 
 \begin{figure}[htbp]
     \centering{
-    \scalebox{0.5}{\includegraphics[width=\textwidth]{Pictures/cpu-singleapp.jpg}}}
+    \scalebox{0.7}{\includegraphics[width=\textwidth]{Pictures/cpu-singleapp.jpg}}}
     \label{fig:cpu-single}
     \rule{35em}{0.5pt}
-    \caption[CPU load and repartitions with only Oxymeter application running]{CPU load and repartitions with only Oxymeter application running}
+    \caption{CPU load and repartitions with only Oxymeter application running. Process on the left are system thread.}
 \end{figure}
 
 
@@ -91,14 +91,14 @@ During the stress tests, both CPU load and repartitions over running process, an
     \scalebox{0.5}{\includegraphics[width=\textwidth]{Pictures/cpu-loadapp.jpg}}}
     \label{fig:cpu-load}
     \rule{35em}{0.5pt}
-    \caption[CPU load and repartitions during the web navigation simulation]{CPU load and repartitions during the web navigation simulation}
+    \caption[CPU load and repartitions during the web browsing simulation]{CPU load and repartition during the web browsing simulation}
 \end{figure}
 
-For each case, except the video game that made freeze and crash the Ara platform, results where exactly the same than with a single activity - ie. just our application - and we achieve the same bit-rate.
+For each case, except the video game that made freeze and crash the ARA platform, results where exactly the same than with a single activity - ie. just our application - and we achieve the same bit-rate.
 
 \subsubsection{Conclusion}
 {
-Following conclusion in\ref{result-ara}, we are now able to determine the Digital-to-Analogic converter characteristic. In order to get the better ratio as possible between the resolution, the sampling rating, and and the clock rate we can achieve with the LED driver emitter,chosen values are summarized in the next table.
+Following conclusion in\ref{result-ara}, we are now able to determine the analogical to digital converter characteristic. In order to get the better ratio as possible between the resolution, the sampling rating, and and the clock rate we can achieve with the LED driver emitter,chosen values are summarized in the next table.
 
 \begin{table}[htbp]
 \begin{center}
@@ -127,7 +127,7 @@ In this section, we will focus on the VLC module hardware design, that will have
 
 \subsection{Needs description}
 
-The VLC receiver front-end circuit must detect with high frequency precision the modulated light within a range starting from 1kHz to 1Mhz. Before digitalization, the current generated by the photodiode has to be converted into current.
+The VLC receiver front-end circuit must detect with high frequency precision the modulated light within a range starting from 1kHz to MHz. Before digitalization, the current generated by the photodiode has to be converted into current.
 As a major issue in VLC are interferences - from the ambient light or UV from the sun - the signal should be properly filtered and amplified before digitalization.
 
 Our solution is constituted with a photodiode, witch convert the modulate light into current. It's followed by a trans-impedance amplifier in order to convert the photodiode output current into tension. Then, an analogical low-pass filter and gain are applied, before digitalization by the a micro-controller unit.
@@ -144,7 +144,7 @@ Our solution is constituted with a photodiode, witch convert the modulate light 
 
 The first part of the circuit is the Trans-Impedance Amplifier, presented in \ref{fig:tia}. TIA is a standard electronic pattern made from an operational amplifier and a resistor to convert the current to a tension.
 
-We choose the MCP6292 Op-Amp for its 10MHz wide band pass, and 3.3V input voltage. Indeed, the interesting input frequency  from modulated light won't be greater than 1MHz and we will be able supply it with the MCU.
+We choose the MCP6292 Op-Amp for its 10 MHz wide band pass, and 3.3V input voltage. Indeed, the interesting input frequency  from modulated light won't be greater than 1 MHz and we will be able supply it with the MCU.
 The DC output voltage due to the photodiode is given by \ref{eq:vout} 
 
 \begin{equation}
@@ -156,9 +156,9 @@ The capacitance in the feed-back loop is determined to compensate the photodiode
 
 \subsection{2nd: High Pass filter}
 
-After the Trans-Impedance Amplifier circuit part, we add a high-pass (figure \ref{fig:hpf} filter to attenuate the noise from the ambient lights such as sunlight and 50-120kHz indoor fluorescent lights.
+After the Trans-Impedance Amplifier circuit part, we add a high-pass (figure \ref{fig:hpf} filter to attenuate the noise from the ambient lights such as sunlight and 50-120 kHz indoor fluorescent lights.
 
-To perform, the filter was designed with a cut-off frequency of 200Hz. We chose $C3$ and $R2$ value. According to figure \ref{fig:hpf-bode} and equation \ref{eq:ht-fc}, we use 10nF capacitance and 48kH$\Omega$ resistor
+To perform, the filter was designed with a cut-off frequency of 200 Hz. We chose $C3$ and $R2$ value. According to figure \ref{fig:hpf-bode} and equation \ref{eq:ht-fc}, we use 10 nF capacitance and 48 kH$\Omega$ resistor
 \begin{equation}
 f_{cf}  = \frac{1}{2\pi RC}
 \label{eq:ht-fc}
@@ -184,7 +184,7 @@ f_{cf}  = \frac{1}{2\pi RC}
 
 The output gain in the second part of the circuit aims to increase the signal amplitude, without increasing the noise. As a result, we will get better $SNR$, and digital signal processing and thresholding will be more accurate.
 
-As for the TIA, a capacitance $C_3$ of $6.8pF$ has been added to assure the AOP stability.
+As for the TIA, a capacitance $C_3$ of $6.8pF$ has been added to assure the Op-Amp stability.
 
 The gain $G_{OUT}$ has been adjusted during our final experiments with the modulated LED and its value is given by \ref{eq:gain}
 
@@ -213,7 +213,7 @@ In this section, we will discuss the LED emitter and driver we developed for our
 A commercial LED has been used as a modulated light source with an on-off signal generated by a micro-controller unit, that carry transmitted data encoded using a modified 4B6B run-length limited coding.
 
 \subsection{hardware}
-The MCU used as LED Driver is an STM32L0, exactly the same as for the receiver, as its development kit is low cost, and toolchains, and software development environment can be shared. We exploited its 3.3V digital output to blink the emitter white LED.
+The MCU used for the LED sriver is an STM32L0, exactly the same as for the receiver, because its development kit is low cost, and toolchain with software development environment can be shared. We exploited its 3.3V digital output to blink the emitter white LED.
 
 \subsection{OOK modulation}
 Following IEEE 802.15.7 recommendations, we propose to use an On-Off Keying modulated signal as described in \ref{ook} meaning that each bit 1 is mapped onto an high output level, and bit 0 mapped onto null output on the digital micro-controller output. 
@@ -221,7 +221,7 @@ Following IEEE 802.15.7 recommendations, we propose to use an On-Off Keying modu
 \subsection{4B6B Line coding}
 
 The line code used is a modified version of the standard 4B6B described in \ref{rll} to increase the transmitted power.
-4 bits are mapped into 6bits always using 4 bit 1 and 2 bit 0. In that way, duty cycle is 2/3 instead of 1/2 for the standard version. This modified version would be used as error detection too.
+4 bits are mapped into 6 bits always using 4 bit 1 and 2 bit 0. In that way, duty cycle is 2/3 instead of 1/2 for the standard version. This modified version would be used as error detection too.
 
 \begin{table}[htbp]
 \begin{center}
@@ -372,7 +372,7 @@ The function called in the interruption callback flush the last 350 bits, to sen
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------
-%	Ara Android App
+%	ARA Android App
 %----------------------------------------------------------------------------------------
 
 \section{ARA Android App}
@@ -382,7 +382,7 @@ In this part, we describe the Android application that we have developed, to sup
 \subsection{Application structure and operations}
 Our application as been developed using Android Studio IDE \citep{android} with the Gradle build toolchain. The target SDK API version is number 18, to be compliant with the operating system version which has been installed on the AP Development Board.
 
-The application package has been called respecting Java name convention : edu.upc.entel.wng.vlcAraModule and contents 3 classes :
+The application package has been called respecting Java name convention : edu.upc.entel.wng.vlcAraModule and contains 3 classes :
 
 \begin{itemize}
 \item VLCAraActivity : initialize the application and user interface. It surcharges the Activity class , as requested by the Android API.
@@ -424,7 +424,7 @@ The ARA MDK is provided with an operating system level driver, developed in C, t
 However, this C interface, can't be directly used through the Java API. In order to give the possibility to perform I2C operations in our Android application, we develop a JNI interface that would wrap the C driver into a Java package.
 So we define 2 Java classes : 
 \begin{itemize}
-\item I2CManager : it configures the i2c bus, by using UNIX I2C kernel driver and execute operations defined in I2CTransaction.
+\item I2CManager : it configures the I2C bus, by using UNIX I2C kernel driver and execute operations defined in I2CTransaction.
 \item I2CTransaction : it represents read or write operation on the bus.
 \end{itemize}
 
