@@ -75,14 +75,14 @@ In addition to \ref{result-ara}, we should be sure that a normal to extensive mo
 
 In order to do that, we use a benchmark application that would simulate typical smartphone use-case : web browsing, shot-message writing, video playing or games.
 
-During the stress tests, both CPU load and repartitions over running process, and RAM usage are monitored.
+During the stress tests, both CPU load and allocation over running process, and RAM usage are monitored.
 
 \begin{figure}[htbp]
     \centering{
     \scalebox{0.7}{\includegraphics[width=\textwidth]{Pictures/cpu-singleapp.jpg}}}
     \label{fig:cpu-single}
     \rule{35em}{0.5pt}
-    \caption{CPU load and repartitions with only Oxymeter application running. Process on the left are system thread.}
+    \caption{CPU load and allocation with only Oxymeter application running. Process on the left are system thread.}
 \end{figure}
 
 
@@ -91,7 +91,7 @@ During the stress tests, both CPU load and repartitions over running process, an
     \scalebox{0.5}{\includegraphics[width=\textwidth]{Pictures/cpu-loadapp.jpg}}}
     \label{fig:cpu-load}
     \rule{35em}{0.5pt}
-    \caption[CPU load and repartitions during the web browsing simulation]{CPU load and repartition during the web browsing simulation}
+    \caption[CPU load and repartitions during the web browsing simulation]{CPU load and allocation during the web browsing simulation}
 \end{figure}
 
 For each case, except the video game that made freeze and crash the ARA platform, results where exactly the same than with a single activity - ie. just our application - and we achieve the same bit-rate.
@@ -132,7 +132,7 @@ As a major issue in VLC are interferences - from the ambient light or UV from th
 
 Our solution is constituted with a photodiode, witch convert the modulate light into current. It's followed by a trans-impedance amplifier in order to convert the photodiode output current into tension. Then, an analogical low-pass filter and gain are applied, before digitalization by the a micro-controller unit.
 
-\subsection{1st AOP : Current to tension converter}
+\subsection{1st Op-Amp : Trans-Impedance Amplifier}
 
 \begin{figure}[htbp]
     \centering
