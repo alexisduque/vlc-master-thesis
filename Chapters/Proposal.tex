@@ -28,7 +28,7 @@ Considering the receiver module, our light sensor consist in a photodiode follow
 
 The analog to digital conversion has been realized at 1,1 MSPS by the micro-controller unit. To fit the platform requirement and optimize the throughput, it performs several operations such as thresholding, decoding and buffering.
 
-The transmission between the MCU and the Ara Development Kit is done in polling mode exploiting the I2C bus present on both side of the system. 
+The transmission between the MCU and the Ara Development Kit is achieved through I2C bus in "slave-transmit" mode, with the MCU as slave-node and the ARA as master-node.
 
 Finally, we develop a basic Android application for the platform, that implement I2C bus initialization, data polling, and logging for later computation and analysis.
 
