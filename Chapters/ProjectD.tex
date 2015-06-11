@@ -14,7 +14,7 @@
 
 In this section, we will describe different studies and preliminary experimentation we've done before designing  the module.
 
-In fact, because of the lake of literature or past experience with the ARA platform, we first need to study the ARA Module Development Kit send by Google ATAP. We focus on understanding the role of each board, and there I/O - regarding protocols and speed. Then we determine the reliable rate on witch the operating system can execute a single task - such as I/O operation. Finally we perform some benchmark and CPU load test. 
+In fact, because of the lake of literature or past experience with the ARA platform, we first need to study the ARA Module Development Kit send by Google ATAP. Our point of interest was understanding the role of each board, and there I/O - regarding protocols and speed. Then we determined the reliable rate on which one the operating system can execute a single task - such as performing an I$^2$C operation. Finally we did some benchmark and CPU load tests. 
 
 \subsection{MDK and boards study}
 
@@ -22,13 +22,16 @@ In fact, because of the lake of literature or past experience with the ARA platf
 
 \subsubsection{Problematic}
 
-In this part, we would determine the I/O performance between the ARA main board and  modules in order to fit its characteristics: maximum ADC sampling rate, resolution, buffering needs.
+In this part, we would determine the I/O performance between the ARA main board and modules in order to fit its characteristics: maximum ADC sampling rate, resolution, buffering needs.
 
 We focused on the minimum stable thread execution speed, which fix the number of Android I/O operation per second, then the maximum number of bytes we can read each time.
 
-\subsubsection{Protocol}
-We modify the oxymeter application changing the thread execution interval from 1ms to 100ms and record the effective execution period using time-stamps. To have a set consistent datasets, we record 1 million of sample for each measure. As consequence, we would be able to determine the minimum thread execution period, and its stability.
-This point is particularly important for designing the buffer on the VLC receiver : a bigger I/O operation period than expected will cause overflow, and data loss of data.
+\subsubsection{Experiments with the Oxymeter module and an Arduino}
+
+The Ara module development kit is shipped with a demo module. It consists in an oxymeter sensor that use infrared to determine the heart rate and blood oxygen. The application displays two graphs corresponding to the measured LED reflection at two different frequencies.
+
+We modify the oxymeter application changing the thread execution interval from 1ms to 100ms and record the effective execution period using time-stamps. To have a consistent dataset, we record 1 million of samples for each measure. As consequence, we would be able to determine the minimum thread execution period, and its stability.
+This point is particularly important for designing the buffer on the VLC receiver : a bigger I/O operation period than expected will cause overflow, and data loss.
 
 To determine the bus speed and the max effective transferred without error for each operation, we replaced the oxymeter module by an Arduino that will write different among of data on the bus. In addition, we use a logic analyzer to record what's happening on the bus.
 
@@ -45,23 +48,23 @@ To determine the bus speed and the max effective transferred without error for e
   \hfill%
   \begin{minipage}[c]{.46\linewidth}
   \centering{
-    \scalebox{1}{\includegraphics[width=\textwidth]{Pictures/dsp50.png}}}
-    \label{fig:dsp50}
+    \scalebox{1}{\includegraphics[width=\textwidth]{Pictures/dsp50.png}\label{fig:dsp50}}}
+    \
     \rule{16em}{0.5pt}
     \caption[Probability density of Android thread execution interval with 50ms as defined period]{Probability density of Android thread execution interval with 50ms as defined period}
   \end{minipage}
   
 \end{figure}
 \begin{center}
-Remark : as value lower than expected have no consequences, we doesn't plot them on the chart, but are taken in account in the probability repartitions.
+Remark : as value lower than expected have no consequence, we don't plot them on the chart, but are taken in account in the probability repartitions.
 \end{center}
 
 \begin{itemize}
-\item Android threads can't reach lower period than 8ms but with an elevate variance, as we can see in .
+\item Android threads can't reach lower period than 8ms but with an elevate variance.
 
 \item Performing statistical analysis, for each execution period and plotting the effective period distribution and variance, we can consider 30ms as safe.
 
-\item Even if the I2C bus speed clock should be 400kHz - according to the ARA MDK documentation - the effective clock rate is 133kHz.
+\item Even if the I$^2$C bus speed clock rate should be 400kHz - according to the ARA MDK documentation - the effective clock rate is 133kHz.
 On other hand, even if the kernel driver limits I/O operations to 512 bytes, the bus gets corrupted trying to transfer more than 350 bytes per operation.
 \end{itemize}
 
@@ -73,9 +76,9 @@ According to \ref{result-ara}, we should design our VLC receiver module to takin
 
 In addition to \ref{result-ara}, we should be sure that a normal to extensive modular smartphone won't affect VLC module performances, even if the application run in background mode. In this case, the Android CPU governor will reduce the priority of our application, giving it less resources or stopping it if necessary.
 
-In order to do that, we use a benchmark application that would simulate typical smartphone use-case : web browsing, shot-message writing, video playing or games.
+In order to do that, we use a benchmark application that would simulate typical smartphone use-case : web browsing, short-message writing, video playing or games.
 
-During the stress tests, both CPU load and allocation over running process, and RAM usage are monitored.
+During the stress tests, both CPU load, CPU allocation, and RAM usage are monitored.
 
 \begin{figure}[htbp]
     \centering{
@@ -98,7 +101,7 @@ For each case, except the video game that made freeze and crash the ARA platform
 
 \subsubsection{Conclusion}
 {
-Following conclusion in\ref{result-ara}, we are now able to determine the analogical to digital converter characteristic. In order to get the better ratio as possible between the resolution, the sampling rating, and and the clock rate we can achieve with the LED driver emitter,chosen values are summarized in the next table.
+Following conclusion in\ref{result-ara}, we are now able to determine the analogical to digital converter characteristic. In order to get the better ratio as possible between the resolution, the ADC sampling rate and the LED driver clock rate, we chose values summarized in the next table.
 
 \begin{table}[htbp]
 \begin{center}
@@ -212,11 +215,11 @@ In this section, we will discuss the LED emitter and driver we developed for our
  
 A commercial LED has been used as a modulated light source with an on-off signal generated by a micro-controller unit, that carry transmitted data encoded using a modified 4B6B run-length limited coding.
 
-\subsection{hardware}
-The MCU used for the LED sriver is an STM32L0, exactly the same as for the receiver, because its development kit is low cost, and toolchain with software development environment can be shared. We exploited its 3.3V digital output to blink the emitter white LED.
+\subsection{Micro-Controller Unit}
+The MCU used for the LED driver is an STM32L0, exactly the same as for the receiver, because its development kit is low cost, and toolchain with software development environment can be shared. We exploited its 3.3V digital output to blink the emitter white LED.
 
 \subsection{OOK modulation}
-Following IEEE 802.15.7 recommendations, we propose to use an On-Off Keying modulated signal as described in \ref{ook} meaning that each bit 1 is mapped onto an high output level, and bit 0 mapped onto null output on the digital micro-controller output. 
+Following IEEE 802.15.7 recommendations, we propose to use an On-Off Keying modulated signal as described in section \ref{modulation} meaning that each bit 1 is mapped onto an high output level, and bit 0 mapped onto null output on the digital micro-controller output. 
 
 \subsection{4B6B Line coding}
 
@@ -257,7 +260,7 @@ To compare the performance between different RLL coding, Manchester has been imp
 
 \subsection{Transmission Pattern} \label{frame}
 
-We propose a transmission pattern that would easily permits clock synchronization on the receiver. In addition, it has been designed taking account of the flickering and dimming issue.
+We propose a transmission pattern that would easily allow clock synchronization on the receiver. In addition, it has been designed taking account of the flickering and dimming issue.
 
 Three transmissions state are defined : 
 \begin{itemize}
@@ -323,13 +326,13 @@ According to \ref{tab:conclusion-adc}, we chose to use the STM32L0 micro-control
 \item Processor Frequency up to 32 MHz: it will let us embedded some signal processing in order to reduce the computation on the Android.
 \item Low power consumption : 87 $\mu$A/MHz: it's a key feature for the mobile battery powered.
 \item Analogical Input with 1.1 MSPS ADC : it fits our requirements.
-\item Different I/O, including I2C : it's a requirement to connect the MCU to the MDK endpoint board.
+\item Different I/O, including I$^2$C : it's a requirement to connect the MCU to the MDK endpoint board.
 \item 8kB RAM : this feature will let us implements the buffering using volatile memory (RAM).
 \end{itemize}
 
 \subsection{Software implementation}
 
-We developed the MCU software in C, using the Arm GCC tool-chain and ST-Link debugger interface included in the Em::Blocks \citep{emblocks} IDE.
+We developed the MCU software in C, using the Arm GCC tool-chain and ST-Link debugger interface included in the Em::Blocks IDE \citep{emblocks}.
 
 The MCU is initialized setting the HSI as source clock with 32MHZ as processor frequency. Only I$^2$C, UART, ADC are enabled.
 
@@ -337,7 +340,7 @@ The main program works in interrupt mode.
 
 \subsubsection{Data Acquisition}
 
-The ADC sampling rate is set to 1,1 MSPS, in order to get the higher frequency precision, and the resolution to 8 bits, sufficient for OOK modulation.
+The ADC sampling rate is set to 1,1 MSPS, in order to get the higher frequency precision, and the resolution to 8 bits, enough for OOK modulation.
 
 The acquisition is done using buffering and Direct Memory Access (DMA) mode. 
 When the DMA buffer is full, an interruption is thrown starting the demodulation and RLL decoding process.
@@ -362,11 +365,11 @@ After being decoded , bits are pushed into a FIFO Buffer implemented in \ref{cod
 \subsubsection{Input/output}
  
 \begin{enumerate}
-\item UART peripheral is enabled only when debugging or saving measure to the laptop via Serial->USB port.
+\item UART peripheral is enabled only in debugging case or to record measures to the laptop via Serial-to-USB port.
 
-\item I$^2$c is enabled in slave mode and connected to the ARA module development board. An interruption is thrown when a read request is detected from the master peripheral driven by the Android application.
+\item I$^2$C is enabled in slave mode and connected to the ARA module development board. An interruption is thrown when a read request coming from the master peripheral driven by the Android application. is detected 
 
-The function called in the interruption callback flush the last 350 bits, to send it to the I$^2$c.
+The function called in the interruption callback flush the last 350 bytes, to send them to the I$^2$c.
 \lstinputlisting[language=C, caption=I$^2$c interrupt Callback ,label=i2cinter, firstline=122, lastline=127]{CodeReceiver/i2c.c}
 
 \end{enumerate}
@@ -382,20 +385,24 @@ In this part, we describe the Android application that we have developed, to sup
 \subsection{Application structure and operations}
 Our application as been developed using Android Studio IDE \citep{android} with the Gradle build toolchain. The target SDK API version is number 18, to be compliant with the operating system version which has been installed on the AP Development Board.
 
-The application package has been called respecting Java name convention : edu.upc.entel.wng.vlcAraModule and contains 3 classes :
+The application package has been called respecting Java name convention :
+
+\lstinputlisting[language=C ,label=package, firstline=6, lastline=6]{CodeAndroid/Sensor.java}
+
+This package includes 3 classes :
 
 \begin{itemize}
 \item VLCAraActivity : initialize the application and user interface. It surcharges the Activity class , as requested by the Android API.
-\item Sensor : define and perform operations to communicate with our module such as I2C bus initialization, data polling as well as handling and message with the User Interface (UI).
+\item Sensor : define and perform operations to communicate with our module such as I$^2$C bus initialization, data polling as well as handling and message with the User Interface (UI).
 \item VlcLogger : this class realize logging operation saving received data on the board internal storage or an external SD Card.
 \end{itemize}
 
 Application workflow is quiet simple :
 \begin{enumerate}
 \item Initialize and start the application main Activity.
-\item Setup the I2C Bus.
+\item Setup the I$^2$C Bus.
 \item Initialize the logger and create a log file.
-\item Start the \textbf{Sensor} thread that poll I2C bus at defined interval and send the result to the android activity. 
+\item Start the \textbf{Sensor} thread that poll I$^2$C bus at defined interval and send the result to the Android activity. 
 \item Handle Sensor thread messaging and user interaction.
 \end{enumerate}
 
@@ -417,14 +424,14 @@ Each component are placed in a horizontal layout container.
     \label{fig:androidapp}
 \end{figure}
 
-\subsection{I2C JNI interface}
+\subsection{I$^2$C JNI interface}
 
-As the Android Java API for the ARA Module Development Kit is the same as the standard API, we need to implement additional components in order to access the low level hardware such as the GPIO or the I2C bus.
+As the Android Java API for the ARA Module Development Kit is the same as the standard API, we need to implement additional components in order to access the low level hardware such as the GPIO or the I$^2$C bus.
 The ARA MDK is provided with an operating system level driver, developed in C, that can be used to configure, read and write date, in a simple way.
-However, this C interface, can't be directly used through the Java API. In order to give the possibility to perform I2C operations in our Android application, we develop a JNI interface that would wrap the C driver into a Java package.
+However, this C interface, can't be directly used through the Java API. In order to give the possibility to perform I$^2$C operations in our Android application, we develop a JNI interface that would wrap the C driver into a Java package.
 So we define 2 Java classes : 
 \begin{itemize}
-\item I2CManager : it configures the I2C bus, by using UNIX I2C kernel driver and execute operations defined in I2CTransaction.
+\item I2CManager : it configures the I$^2$C bus, by using UNIX I$^2$C kernel driver and execute operations defined in I2CTransaction.
 \item I2CTransaction : it represents read or write operation on the bus.
 \end{itemize}
 

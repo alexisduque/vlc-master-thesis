@@ -58,7 +58,7 @@ for long range communication, but for short distances its transmission angle is 
 narrow (and hence it can be easily obstructed) without using lenses. Another
 important disadvantage of laser is that poses health hazards to human beings.
 
-\subsection{Modulation and transmitter}
+\subsection{Modulation and transmitter}\label{modulation}
 
 The light emitted by LEDs can be modulated in different forms, and there are also
 several types of receivers that can be used to decode the modulated light. Next,
@@ -82,7 +82,7 @@ called intensity modulation. Frequency modulation however, is very hard to apply
 with visible light. It can be done but requires advanced laser setups to change
 the signal’s properties, like phase and frequency, through interference.
 
-There are many different modulation schemes in use for VLC, and we will now
+There are many different modulation schemes used for VLC, and we will now
 discuss the most commonly used.
 
 \begin{enumerate}
@@ -111,7 +111,8 @@ signals to encode symbols. This modulation is sensitive to external
 light sources as they influence the intensity, and has relative low speeds
 compared to other techniques. Dimming control can easily be implemented
 in PAM by changing the probability of the constellation points \citep{diming}
-iv Frequency Shift Keying (FSK) looks a lot like On-Off-Keying, but instead of
+
+\item Frequency Shift Keying (FSK) looks a lot like On-Off-Keying, but instead of
 switching a carrier on and off, the system switches between two frequencies.
 This switch in frequency can be in terms of color i.e. a one is red and
 a zero is blue, or in pulse frequency.
@@ -147,7 +148,8 @@ The Matlab-based platform of De Lausnay et al. evaluates different modulation
 techniques and can also help to select the right modulation type \citep{matlab}.
 
 Based on the information above, we decided to use On-Off-Keying modulation
-for our platform because of the good average performance. One the other hand, the use of this technique keeps hardware component count low as well as the modulation/demodulation programming stays simple.
+for our platform because the use of this technique keeps hardware component count low
+as well as the modulation/demodulation programming stays simple.
 
 \end{enumerate}
 
@@ -205,8 +207,8 @@ than other sensors.
 Line coding technique are used to send arbitrary data over a communications channel with bandwidth
 limits.
 It bounds the length of stretches (runs) of repeated bits during which the signal does not change
-If the runs are too long clock recovery is difficult, while if they are too short, the high frequencies
-might be attenuated by the communications channel.
+If the runs are too long clock recovery is difficult, while if they are too short, the high frequencies components
+that are more attenuated by the communications channel.
 
 IEEE 802.15.7 standard suggests different RLL codes for VLC PHY I, that can be used with OOK or VPPM modulation.
 \subsubsection{Manchester}
@@ -303,7 +305,7 @@ Google wants Project ARA to lower the entry barrier for phone hardware manufactu
 
 \subsection{Structure and features}
 
-ARA Smartphones are built using modules inserted into metal endoskeletal frames known as "endos". The frame will be the only component in an ARA Smartphone made by Google. It acts as the switch to the on-device network linking all the modules together. Two frame sizes will be available at first: "mini", a frame about the size of a Nokia 3310 and "medium", about the size of a LG Nexus 5. In the future, a "large" frame about the size of a Samsung Galaxy Note 3 will be available. Frames have slots on the front for the display and other modules. On the back are additional slots for modules. The data from the modules can be transferred at up to 10 gbps connection. The 2x2 modules have two connections and will allow up to 20 gbps. However, this stack isn't yet included in the ARA Development Kit.
+ARA Smartphones are built using modules inserted into metal endoskeletal frames known as "endos". The frame will be the only component in an ARA Smartphone made by Google. It acts as the switch to the on-device network linking all the modules together. Two frame sizes will be available at first: "mini", a frame about the size of a Nokia 3310 and "medium", about the size of a LG Nexus 5. In the future, a "large" frame about the size of a Samsung Galaxy Note 3 will be available. Frames have slots on the front for the display and other modules. On the back are additional slots for modules. The data from the modules can be transferred at up to 10 Gbps connection. The 2x2 modules have two connections and will allow up to 20 Gbps. However, this stack isn't yet included in the ARA Development Kit.
 
 Modules can provide common smartphone features, such as cameras and speakers, but can also provide more specialized features, such as medical devices, receipt printers, laser pointers, pico projectors, night vision sensors, or game controller buttons. Each slot on the frame will accept any module of the correct size. The front slots are of various heights and take up the whole width of the frame. The rear slots come in standard sizes of 1x1, 1x2 and 2x2. Modules can be hot-swapped without turning the phone off. The frame also includes a small backup battery so the main battery can be hot-swapped.Modules are secured with electropermanent magnets. The enclosures of the modules were planned to be 3D-printed, but due to the lack of development in the technology Google opted instead for a customizable molded case.
 
@@ -338,7 +340,7 @@ It should be wired to the Endoskeleton Switch Board with 8 SMA coaxial cables
   \label{fig:ap-board}
 \end{figure}
 
-\subsubsection{Endoskeleton Switch Dev Board}\
+\subsubsection{Endoskeleton Switch Dev Board}
 
 This board is the development kit for the Endoskeleton on which each module will be connected.
 It bridges the application processor and the modules using an UniPro high-speed interface.
