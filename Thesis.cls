@@ -115,7 +115,8 @@
 \usepackage{lstpatch}
 \usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage{color}	
+\usepackage{color}
+\usepackage{float}
 \usepackage{amsmath}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -209,7 +210,7 @@
 %	defined as \examname above so you cite it as \examname
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Light sensor development for ARA platform} % Your thesis title - this is used in the title and abstract
+\thesistitle{Light sensor development for Ara platform} % Your thesis title - this is used in the title and abstract
 %-------------------------------------------------  
 \supervisor{Pr. Josep \textsc{Paradells Aspas}} % You supervisor's name - this is used in the title page
 %-------------------------------------------------   

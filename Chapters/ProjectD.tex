@@ -7,22 +7,22 @@
 \lhead{Chapter 5. \emph{Project Description}}
 
 %----------------------------------------------------------------------------------------
-%	ARA platform discovery
+%	Ara platform discovery
 %----------------------------------------------------------------------------------------
 
-\section{ARA platform study}
+\section{Ara platform study}
 
 In this section, we will describe different studies and preliminary experimentation we've done before designing  the module.
 
-In fact, because of the lake of literature or past experience with the ARA platform, we first need to study the ARA Module Development Kit send by Google ATAP. Our point of interest was understanding the role of each board, and there I/O - regarding protocols and speed. Then we determined the reliable rate on which one the operating system can execute a single task - such as performing an I$^2$C operation. Finally we did some benchmark and CPU load tests. 
+In fact, because of the lake of literature or past experience with the Ara platform, we first need to study the Ara Module Development Kit send by Google ATAP. Our point of interest was understanding the role of each board, and there I/O - regarding protocols and speed. Then we determined the reliable rate on which one the operating system can execute a single task - such as performing an I$^2$C operation. Finally we did some benchmark and CPU load tests. 
 
 \subsection{MDK and boards study}
 
-\subsection{Android for ARA reliable I/O operation rate}  \label{result-ara}
+\subsection{Android for Ara reliable I/O operation rate}  \label{result-ara}
 
 \subsubsection{Problematic}
 
-In this part, we would determine the I/O performance between the ARA main board and modules in order to fit its characteristics: maximum ADC sampling rate, resolution, buffering needs.
+In this part, we would determine the I/O performance between the Ara main board and modules in order to fit its characteristics: maximum ADC sampling rate, resolution, buffering needs.
 
 We focused on the minimum stable thread execution speed, which fix the number of Android I/O operation per second, then the maximum number of bytes we can read each time.
 
@@ -64,7 +64,7 @@ Remark : as value lower than expected have no consequence, we don't plot them on
 
 \item Performing statistical analysis, for each execution period and plotting the effective period distribution and variance, we can consider 30ms as safe.
 
-\item Even if the I$^2$C bus speed clock rate should be 400kHz - according to the ARA MDK documentation - the effective clock rate is 133kHz.
+\item Even if the I$^2$C bus speed clock rate should be 400kHz - according to the Ara MDK documentation - the effective clock rate is 133kHz.
 On other hand, even if the kernel driver limits I/O operations to 512 bytes, the bus gets corrupted trying to transfer more than 350 bytes per operation.
 \end{itemize}
 
@@ -72,7 +72,7 @@ On other hand, even if the kernel driver limits I/O operations to 512 bytes, the
 According to \ref{result-ara}, we should design our VLC receiver module to taking account an effective bit-rate of 92,4 kbps and will developed the Android application with a module polling thread period to 30ms and an I2C transaction . 
 
 
-\subsection{ARA benchmark}
+\subsection{Ara benchmark}
 
 In addition to \ref{result-ara}, we should be sure that a normal to extensive modular smartphone won't affect VLC module performances, even if the application run in background mode. In this case, the Android CPU governor will reduce the priority of our application, giving it less resources or stopping it if necessary.
 
@@ -82,7 +82,7 @@ During the stress tests, both CPU load, CPU allocation, and RAM usage are monito
 
 \begin{figure}[htbp]
     \centering{
-    \scalebox{0.7}{\includegraphics[width=\textwidth]{Pictures/cpu-singleapp.jpg}}}
+    \scalebox{0.7}{\includegraphics[width=\textwidth]{Pictures/cpu-singleapp.png}}}
     \label{fig:cpu-single}
     \rule{35em}{0.5pt}
     \caption{CPU load and allocation with only Oxymeter application running. Process on the left are system thread.}
@@ -91,13 +91,13 @@ During the stress tests, both CPU load, CPU allocation, and RAM usage are monito
 
 \begin{figure}[htbp]
     \centering{
-    \scalebox{0.5}{\includegraphics[width=\textwidth]{Pictures/cpu-loadapp.jpg}}}
+    \scalebox{0.7}{\includegraphics[width=\textwidth]{Pictures/cpu-loadapp.png}}}
     \label{fig:cpu-load}
     \rule{35em}{0.5pt}
     \caption[CPU load and repartitions during the web browsing simulation]{CPU load and allocation during the web browsing simulation}
 \end{figure}
 
-For each case, except the video game that made freeze and crash the ARA platform, results where exactly the same than with a single activity - ie. just our application - and we achieve the same bit-rate.
+For each case, except the video game that made freeze and crash the Ara platform, results where exactly the same than with a single activity - ie. just our application - and we achieve the same bit-rate.
 
 \subsubsection{Conclusion}
 {
@@ -367,7 +367,7 @@ After being decoded , bits are pushed into a FIFO Buffer implemented in \ref{cod
 \begin{enumerate}
 \item UART peripheral is enabled only in debugging case or to record measures to the laptop via Serial-to-USB port.
 
-\item I$^2$C is enabled in slave mode and connected to the ARA module development board. An interruption is thrown when a read request coming from the master peripheral driven by the Android application. is detected 
+\item I$^2$C is enabled in slave mode and connected to the Ara module development board. An interruption is thrown when a read request coming from the master peripheral driven by the Android application. is detected 
 
 The function called in the interruption callback flush the last 350 bytes, to send them to the I$^2$c.
 \lstinputlisting[language=C, caption=I$^2$c interrupt Callback ,label=i2cinter, firstline=122, lastline=127]{CodeReceiver/i2c.c}
@@ -375,10 +375,10 @@ The function called in the interruption callback flush the last 350 bytes, to se
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------
-%	ARA Android App
+%	Ara Android App
 %----------------------------------------------------------------------------------------
 
-\section{ARA Android App}
+\section{Ara Android App}
 
 In this part, we describe the Android application that we have developed, to support our VLC receiver module.
 
@@ -426,8 +426,8 @@ Each component are placed in a horizontal layout container.
 
 \subsection{I$^2$C JNI interface}
 
-As the Android Java API for the ARA Module Development Kit is the same as the standard API, we need to implement additional components in order to access the low level hardware such as the GPIO or the I$^2$C bus.
-The ARA MDK is provided with an operating system level driver, developed in C, that can be used to configure, read and write date, in a simple way.
+As the Android Java API for the Ara Module Development Kit is the same as the standard API, we need to implement additional components in order to access the low level hardware such as the GPIO or the I$^2$C bus.
+The Ara MDK is provided with an operating system level driver, developed in C, that can be used to configure, read and write date, in a simple way.
 However, this C interface, can't be directly used through the Java API. In order to give the possibility to perform I$^2$C operations in our Android application, we develop a JNI interface that would wrap the C driver into a Java package.
 So we define 2 Java classes : 
 \begin{itemize}

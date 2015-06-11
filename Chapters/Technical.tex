@@ -293,40 +293,40 @@ It supports clock recovery and DC-balanced waveform.
   \label{fig:RxCircuit}
 \end{figure}
 
-\section{ARA Platform}
-\subsection{Introduction to the ARA project}
+\section{Ara Platform}
+\subsection{Introduction to the Ara project}
 
-Project ARA is the codename for an initiative that aims to develop an open hardware platform for creating highly modular smartphones. The platform will include a structural frame or endoskeleton that holds smartphone modules of the owner's choice, such as a display, camera or an extra battery. It would allow users to swap out malfunctioning modules or upgrade individual modules as innovations emerge, providing longer lifetime cycles for the handset, and potentially reducing electronic waste. Project ARA smartphone will begin pilot testing in Puerto Rico later 2015 with a target bill of materials cost of \$50 for a basic grey phone. The project was originally headed by the Advanced Technologies and Projects team within Motorola Mobility while it was a subsidiary of Google. Although Google had sold Motorola to Lenovo, it is retaining the project team who will work under the direction of the Android division.
+Project Ara is the codename for an initiative that aims to develop an open hardware platform for creating highly modular smartphones. The platform will include a structural frame or endoskeleton that holds smartphone modules of the owner's choice, such as a display, camera or an extra battery. It would allow users to swap out malfunctioning modules or upgrade individual modules as innovations emerge, providing longer lifetime cycles for the handset, and potentially reducing electronic waste. Project Ara smartphone will begin pilot testing in Puerto Rico later 2015 with a target bill of materials cost of \$50 for a basic grey phone. The project was originally headed by the Advanced Technologies and Projects team within Motorola Mobility while it was a subsidiary of Google. Although Google had sold Motorola to Lenovo, it is retaining the project team who will work under the direction of the Android division.
 
 \subsection{Project goals}
 Google says the device is designed to be utilized by "6 billion people"; including 1 billion current smartphone users, 5 billion feature phone users, and 1 billion future user not currently connected. Google intends to sell a starter kit where the bill of materials is \$50 and includes a frame, display, battery, low-end CPU and WiFi.
 
-Google wants Project ARA to lower the entry barrier for phone hardware manufacturers so there could be "hundreds of thousands of developers" instead of the current handful of big manufacturers. This would be similar to how the Google Play Store is structured. Lowering the barrier for entry allows many more people to develop modules. Anyone will be able to build a module without requiring a license or paying a fee.
+Google wants Project Ara to lower the entry barrier for phone hardware manufacturers so there could be "hundreds of thousands of developers" instead of the current handful of big manufacturers. This would be similar to how the Google Play Store is structured. Lowering the barrier for entry allows many more people to develop modules. Anyone will be able to build a module without requiring a license or paying a fee.
 
 \subsection{Structure and features}
 
-ARA Smartphones are built using modules inserted into metal endoskeletal frames known as "endos". The frame will be the only component in an ARA Smartphone made by Google. It acts as the switch to the on-device network linking all the modules together. Two frame sizes will be available at first: "mini", a frame about the size of a Nokia 3310 and "medium", about the size of a LG Nexus 5. In the future, a "large" frame about the size of a Samsung Galaxy Note 3 will be available. Frames have slots on the front for the display and other modules. On the back are additional slots for modules. The data from the modules can be transferred at up to 10 Gbps connection. The 2x2 modules have two connections and will allow up to 20 Gbps. However, this stack isn't yet included in the ARA Development Kit.
+Ara Smartphones are built using modules inserted into metal endoskeletal frames known as "endos". The frame will be the only component in an Ara Smartphone made by Google. It acts as the switch to the on-device network linking all the modules together. Two frame sizes will be available at first: "mini", a frame about the size of a Nokia 3310 and "medium", about the size of a LG Nexus 5. In the future, a "large" frame about the size of a Samsung Galaxy Note 3 will be available. Frames have slots on the front for the display and other modules. On the back are additional slots for modules. The data from the modules can be transferred at up to 10 Gbps connection. The 2x2 modules have two connections and will allow up to 20 Gbps. However, this stack isn't yet included in the Ara Development Kit.
 
 Modules can provide common smartphone features, such as cameras and speakers, but can also provide more specialized features, such as medical devices, receipt printers, laser pointers, pico projectors, night vision sensors, or game controller buttons. Each slot on the frame will accept any module of the correct size. The front slots are of various heights and take up the whole width of the frame. The rear slots come in standard sizes of 1x1, 1x2 and 2x2. Modules can be hot-swapped without turning the phone off. The frame also includes a small backup battery so the main battery can be hot-swapped.Modules are secured with electropermanent magnets. The enclosures of the modules were planned to be 3D-printed, but due to the lack of development in the technology Google opted instead for a customizable molded case.
 
-Modules will be available both at an official Google store and at third-party stores. ARA Smartphones will only accept official modules by default, but users can change a software setting to enable unofficial modules. This is similar to how Android handles app installations.
+Modules will be available both at an official Google store and at third-party stores. Ara Smartphones will only accept official modules by default, but users can change a software setting to enable unofficial modules. This is similar to how Android handles app installations.
 
 \subsection{Project team}
 
-Project ARA was developed and is led by Paul Eremenko from Google ATAP. The core Project ARA team at Google consists of three people with most of the work being done by outside contractors. One of the main contractors is NK Labs, a Massachusetts-based engineering firm, whose co-founder is ARA Knaian after whom the project was named. Another contractor is 3D System.
+Project Ara was developed and is led by Paul Eremenko from Google ATAP. The core Project Ara team at Google consists of three people with most of the work being done by outside contractors. One of the main contractors is NK Labs, a Massachusetts-based engineering firm, whose co-founder is Ara Knaian after whom the project was named. Another contractor is 3D System.
 
 \subsection{History and development process}
 
-The first version of the developers' kit (MDK v0.1x) relies on a prototype implementation of the ARA on-device network using the MIPI UniPro protocol implemented on FPGA and running over an LVDS physical layer with modules connecting via retractable pins. The second version (MDK v0.2) is built around a much more efficient and higher performance ASIC implementation of UniPro, running over a capacitive M-PHY physical layer.
+The first version of the developers' kit (MDK v0.1x) relies on a prototype implementation of the Ara on-device network using the MIPI UniPro protocol implemented on FPGA and running over an LVDS physical layer with modules connecting via retractable pins. The second version (MDK v0.2) is built around a much more efficient and higher performance ASIC implementation of UniPro, running over a capacitive M-PHY physical layer.
          
 \subsection{Module Development Kit Architecture}
 
-The Module Developper Kit (MDK) we will consider is the v0.11, even if a new one - v0.2 - has been released in January, just after the Google ARA Developer Conference.
+The Module Developper Kit (MDK) we will consider is the v0.11, even if a new one - v0.2 - has been released in January, just after the Google Ara Developer Conference.
 The kit contains three dev boards and a bunch of SMA cables. The dev boards are an Application Processor (AP) board, a Generic Endpoint Dev Board and an Endoskeleton Switch Dev Board.
 
 \subsubsection{Android AP board}
 
-The Application Processor Board is a development kit for the Android operating system giving convenient way to modify or update the OS. It's part of the core of the ARA smartphone.
+The Application Processor Board is a development kit for the Android operating system giving convenient way to modify or update the OS. It's part of the core of the Ara smartphone.
 
 Board processor is an ARMv7 and the operating system base is on Android Tegra 3.10, and provide the SDK API 18, for the Android application developers.
 
@@ -336,7 +336,7 @@ It should be wired to the Endoskeleton Switch Board with 8 SMA coaxial cables
   \centering
     \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/APDevBoard.png}}
     \rule{35em}{0.5pt}
-  \caption[ARA Application Processor Board]{ARA Application Processor Board}
+  \caption[Ara Application Processor Board]{Ara Application Processor Board}
   \label{fig:ap-board}
 \end{figure}
 
@@ -344,13 +344,13 @@ It should be wired to the Endoskeleton Switch Board with 8 SMA coaxial cables
 
 This board is the development kit for the Endoskeleton on which each module will be connected.
 It bridges the application processor and the modules using an UniPro high-speed interface.
-The ARA team also introduced a new software protocol called Greybus, which handles the communications between the endoskeleton and the module at an higher level, making a convenient way for module developers to manipulate the UniPro stack.
+The Ara team also introduced a new software protocol called Greybus, which handles the communications between the endoskeleton and the module at an higher level, making a convenient way for module developers to manipulate the UniPro stack.
 
 \begin{figure}[htbp]
   \centering
     \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/endo.png}}
     \rule{35em}{0.5pt}
-  \caption[ARA Endoskeleton Switch Board]{ARA Endoskeleton Switch Dev Board}
+  \caption[Ara Endoskeleton Switch Board]{Ara Endoskeleton Switch Dev Board}
   \label{fig:endo}
 \end{figure}
 
@@ -374,10 +374,10 @@ Like the AP Board, it should be connected to the Endoskeleton with 8 SMA coaxial
   \centering
     \scalebox{0.4}{\includegraphics[width=\textwidth]{Pictures/genericendpoint.png}}
     \rule{35em}{0.5pt}
-  \caption[ARA Generic Endpoint Board]{ARA Generic Endpoint Board}
+  \caption[Ara Generic Endpoint Board]{Ara Generic Endpoint Board}
   \label{fig:gpendpoint}
 \end{figure}
 
 \subsubsection{MDK Configuration and Setup}
 
-See the document in Appendix \ref{ARA}
+See the document in Appendix \ref{Ara}

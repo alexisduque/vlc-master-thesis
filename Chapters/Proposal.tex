@@ -15,10 +15,10 @@ In this chapter, we would introduce our proposal and contribution to current VLC
 \section{System Description}
 
 
-Considering previous results and solutions, we propose an innovative solution, taking advantage of the ARA modular smartphone,
+Considering previous results and solutions, we propose an innovative solution, taking advantage of the Ara modular smartphone,
 to design a well suited front-end receiver for visible light communication.
 
-As the ARA platform let use choose our own hardware and receiver, we would avoid problems and sampling limitations related to camera, or ambient light sensor.
+As the Ara platform let use choose our own hardware and receiver, we would avoid problems and sampling limitations related to camera, or ambient light sensor.
 On other hand, the modular platform, through its UniPro interface on the endoskeleton board, give us the possibility to connect our module with the same performance than if it has been directly plugged in the main application processor board.
 In this way, we don't need to use a smartphone peripheral, such as USB, or Bluetooth controller, that would add a huge overhead in the transmission and processing.
 
@@ -28,7 +28,7 @@ Considering the receiver module, our light sensor consist in a photodiode follow
 
 The analog to digital conversion has been realized at 1,1 MSPS by the micro-controller unit. To fit the platform requirement and optimize the throughput, it performs several operations such as thresholding, decoding and buffering.
 
-The transmission between the MCU and the ARA Development Kit is achieved through I2C bus in "slave-transmit" mode, with the MCU as slave-node and the ARA as master-node.
+The transmission between the MCU and the Ara Development Kit is achieved through I2C bus in "slave-transmit" mode, with the MCU as slave-node and the Ara as master-node.
 
 Finally, we develop a basic Android application for the platform, that implement I2C bus initialization, data polling, and logging for later computation and analysis.
 
