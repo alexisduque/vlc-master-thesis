@@ -18,7 +18,7 @@ We propose to evaluate different aspects and characteristics of our system consi
 
 In addition, we consider different cases: with or without ambient light interferences, Manchester or 4B6B coding, changing the clock rate and the emitter distance from the receiver. 
 
-\section{Protocol}
+\section{Validation Method}
 
 The receiver was placed in a fix position, while the LED light source keep mobile. In that way, the distance between the emitter and the receiver can  be changed. To keep the measure consistent, we place a luxmeter, just near the receiver to approximate the effective illumination.
 
@@ -56,7 +56,7 @@ f_{Nyquist}  = \frac{f_{sampling}}{2}
 
 \section{Circuit Evaluation}
 
-The received signal was measured at different steps of the analogical processing, using the 2 oscilloscope voices at different points of our circuit. The high-pass filter and adjustments made on the receiver front-end circuit are satisfactory, and improve the signal quality before sampling.
+The received signal was measured at different steps of the analogical processing, using the 2 oscilloscope channels at different points of our circuit. The high-pass filter and adjustments made on the receiver front-end circuit are satisfactory, and improve the signal quality before sampling.
 
 \begin{figure}[htbp]
 	\centering
@@ -68,7 +68,7 @@ The received signal was measured at different steps of the analogical processing
 		\label{fig:circuit-compare}
 	\end{figure}
 	
-section{Digitalization and demodulation}
+\section{Digitalization and demodulation}
 
 In order evaluate our demodulation and digital processing algorithms, we plot the sampled signal and the bits obtained after computation. We can see in the figure \ref{fig:numeric} that it is correct and we can get rid of signal attenuation due to circuit latency.
 \begin{figure}[htbp]
@@ -85,7 +85,7 @@ In order evaluate our demodulation and digital processing algorithms, we plot th
 
 In digital transmission, the number of bit errors is the number of received bits of a data stream over a communication channel that have been altered due to noise, interference, distortion or bit synchronization errors.
 
-As we know exactly the sequence of bit that have been emitted and the decoded sequence, we were able to compute it, for different illumination level and clock-rate, using Manchester or 4B6B coding.
+As we know exactly the emitted bit-sequence and the decoded sequence, we were able to compute it, for different illumination level and clock-rate, using Manchester or 4B6B coding.
 
 \subsection{4B6B}
 
